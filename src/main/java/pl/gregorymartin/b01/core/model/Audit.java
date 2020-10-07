@@ -1,4 +1,4 @@
-package pl.gregorymartin.b01.core;
+package pl.gregorymartin.b01.core.model;
 
 import lombok.Getter;
 

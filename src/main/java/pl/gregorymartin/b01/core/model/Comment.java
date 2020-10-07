@@ -1,4 +1,4 @@
-package pl.gregorymartin.b01.core.model.post;
+package pl.gregorymartin.b01.core.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import javax.persistence.Entity;
-import pl.gregorymartin.b01.core.Audit;
 
 import javax.persistence.*;
 

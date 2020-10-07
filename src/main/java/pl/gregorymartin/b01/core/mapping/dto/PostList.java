@@ -9,20 +9,19 @@ import java.util.List;
 
 @Getter
 @Setter
-public class PostDto {
+public class PostList {
     private String description;
     private String photoUrl;
     private String createdOn;
     private List<String> tags;
-    private Long userId;
     private int numberOfComments;
     private int numberOfLikes;
 
-    public void setUserId(final Long userId) {
-        this.userId = userId;
-    }
+    //liked by present user
+    private boolean presentUser;
 
-    public PostDto(final String description, final String photoUrl, final LocalDateTime createdOn) {
+
+    public PostList(final String description, final String photoUrl, final LocalDateTime createdOn) {
         this.description = description;
         this.photoUrl = photoUrl;
         this.createdOn = getCreatedOnFormatted(createdOn);

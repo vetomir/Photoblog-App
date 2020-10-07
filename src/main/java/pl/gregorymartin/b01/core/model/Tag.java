@@ -1,11 +1,9 @@
-package pl.gregorymartin.b01.core.model.post;
+package pl.gregorymartin.b01.core.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.Entity;
-import pl.gregorymartin.b01.core.Audit;
-import pl.gregorymartin.b01.core.model.post.Post;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;

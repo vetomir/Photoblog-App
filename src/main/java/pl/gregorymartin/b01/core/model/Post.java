@@ -1,11 +1,9 @@
-package pl.gregorymartin.b01.core.model.post;
+package pl.gregorymartin.b01.core.model;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-import pl.gregorymartin.b01.core.Audit;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

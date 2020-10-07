@@ -12,7 +12,7 @@
     <artifactId>b01</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>b01</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Spring Boot CMS Api</description>
 
     <properties>
         <java.version>11</java.version>
@@ -61,6 +61,11 @@
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>6.1.5.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.microsoft.azure</groupId>
+            <artifactId>azure-webapp-maven-plugin</artifactId>
+            <version>1.11.0</version>
         </dependency>
     </dependencies>
 
