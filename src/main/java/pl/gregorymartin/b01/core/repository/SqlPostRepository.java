@@ -4,6 +4,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import pl.gregorymartin.b01.core.mapping.dto.CommentDto;
 import pl.gregorymartin.b01.core.mapping.dto.PostList;
 import pl.gregorymartin.b01.core.mapping.dto.PostSingle;
 import pl.gregorymartin.b01.core.model.Post;
@@ -14,10 +15,6 @@ import java.util.Optional;
 @Repository
 public
 interface SqlPostRepository extends PostRepository, JpaRepository<Post, Long> {
-
-    @Query("SELECT new pl.gregorymartin.b01.core.mapping.dto.PostSingle" +
-            "(p.description, p.photoUrl, p.createdOn) FROM Post p WHERE p.id = :id")
-    Optional<PostSingle> findPostByIdAndMapToDto(long id);
 
     @Query("SELECT new pl.gregorymartin.b01.core.mapping.dto.PostList" +
             "(p.description, p.photoUrl, p.createdOn) FROM Post p")

@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,7 @@ public class Post extends Audit {
 
     @OneToMany//(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "postId", insertable = false)
-    private List<Comment> comments;
+    private List<Comment> comments = new ArrayList<>();
 
 /*    @JsonBackReference
     @ManyToMany(fetch = FetchType.EAGER)

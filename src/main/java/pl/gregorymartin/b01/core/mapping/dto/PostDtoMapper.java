@@ -1,8 +1,10 @@
-package pl.gregorymartin.b01.core.mapping.dto;/*
-package pl.gregorymartin.photoblogapi.mapping.dto;
+package pl.gregorymartin.b01.core.mapping.dto;
+
+
 
 import lombok.RequiredArgsConstructor;
-import pl.gregorymartin.photoblogapi.core.post.Post;
+import pl.gregorymartin.b01.core.model.Post;
+import pl.gregorymartin.b01.core.model.Tag;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,20 +12,24 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PostDtoMapper {
 
-    public static List<PostDto> mapToPostDtos(List<Post> posts) {
+    public static List<PostSingle> mapToPostDtos(List<Post> posts) {
         return posts.stream()
-                .map(post -> mapToPostDto(post))
+                .map(PostDtoMapper::mapToPostDto)
                 .collect(Collectors.toList());
     }
 
-    private static PostDto mapToPostDto(Post post) {
+    public static PostSingle mapToPostDto(Post post) {
 
-        return PostDto.builder()
-                .content(post.getContent())
-                .getPhotoUrl(post.getPhotoUrl())
-                .categories(post.getCategories())
-                .userId(post.getUser().getId())
+        return PostSingle.builder()
+                .description(post.getDescription())
+                .photoUrl(post.getPhotoUrl())
+                .tags(post.getTags().stream()
+                        .map(Tag::getTitle)
+                        .collect(Collectors.toList()))
+                .createdOn(post.getCreatedOnFormatted())
+                .commentDtos(CommentDtoMapper.mapToCommentDtos(post.getComments()))
+                /*.userName(post.getUser().getUsername)*/
+                /*.userAvatar(post.getUser().getAvatar())*/
                 .build();
     }
 }
-*/
