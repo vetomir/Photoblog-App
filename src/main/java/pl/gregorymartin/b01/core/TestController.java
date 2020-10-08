@@ -5,8 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import pl.gregorymartin.b01.application.service.comment.CommentAdd;
 import pl.gregorymartin.b01.application.service.post.PostAdd;
 import pl.gregorymartin.b01.application.service.post.PostGet;
+import pl.gregorymartin.b01.core.mapping.dao.CommentSave;
 import pl.gregorymartin.b01.core.mapping.dao.PostSave;
 import pl.gregorymartin.b01.core.mapping.dto.PostList;
 import pl.gregorymartin.b01.core.mapping.dto.PostSingle;
@@ -21,11 +23,13 @@ class TestController {
     private SqlPostRepository sqlPostRepository;
     private PostGet postGet;
     private PostAdd addPost;
+    private CommentAdd commentAdd;
 
-    public TestController(final SqlPostRepository sqlPostRepository, final PostGet postGet, final PostAdd addPost) {
+    public TestController(final SqlPostRepository sqlPostRepository, final PostGet postGet, final PostAdd addPost, final CommentAdd commentAdd) {
         this.sqlPostRepository = sqlPostRepository;
         this.postGet = postGet;
         this.addPost = addPost;
+        this.commentAdd = commentAdd;
 
         addPost.addPostFromDao(new PostSave("afdsasgagd", "dsfsghfg #CHUJ"));
         addPost.addPostFromDao(new PostSave("afdsgasfad", "dsfsghfg #pizda"));
@@ -34,6 +38,7 @@ class TestController {
         sqlPostRepository.save(new Post("Elasgo", "asddsfsfg"));
         sqlPostRepository.save(new Post("Elo", "elo"));
         sqlPostRepository.save(new Post("Elasfo", "elo"));
+        commentAdd.addComment(new CommentSave("elo"));
     }
 
     @GetMapping("/all")

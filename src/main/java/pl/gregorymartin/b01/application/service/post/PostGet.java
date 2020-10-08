@@ -60,7 +60,7 @@ class PostGet {
         }
         List<PostList> resultDto = result.stream()
                 .distinct()
-                .map(x -> new PostList(x.getDescription(), x.getPhotoUrl(), x.getCreatedOn()))
+                .map(x -> new PostList(x.getDescription(), x.getPhotoUrl(), x.getCreatedOn(), x.getNumberOfComments(), x.getNumberOfLikes(), true))
                 .collect(Collectors.toList());
 
 

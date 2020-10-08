@@ -2,10 +2,12 @@ package pl.gregorymartin.b01.core.mapping.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.gregorymartin.b01.core.model.Tag;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -21,12 +23,19 @@ public class PostList {
     private boolean presentUser;
 
 
-    public PostList(final String description, final String photoUrl, final LocalDateTime createdOn) {
+    public PostList(final String description, final String photoUrl, final LocalDateTime createdOn, final int numberOfComments, final int numberOfLikes, final boolean presentUser) {
         this.description = description;
         this.photoUrl = photoUrl;
         this.createdOn = getCreatedOnFormatted(createdOn);
-    }
 
+/*        this.tags = tags.stream()
+                .map(x -> new Tag().getTitle())
+                .collect(Collectors.toList());*/
+
+        this.numberOfComments = numberOfComments;
+        this.numberOfLikes = numberOfLikes;
+        this.presentUser = presentUser;
+    }
     public String getCreatedOnFormatted(LocalDateTime date){
         return date.format(DateTimeFormatter.ofPattern("dd LLLL yyyy hh:mm"));
     }

@@ -17,7 +17,13 @@ public
 interface SqlPostRepository extends PostRepository, JpaRepository<Post, Long> {
 
     @Query("SELECT new pl.gregorymartin.b01.core.mapping.dto.PostList" +
-            "(p.description, p.photoUrl, p.createdOn) FROM Post p")
+            "(p.description, " +
+            "p.photoUrl, " +
+            "p.createdOn, " +
+            "p.numberOfComments, " +
+            "p.numberOfLikes, " +
+            "true) " +
+            "FROM Post p")
     List<PostList> findAllAndMapToDto(Pageable page);
 
     @Override

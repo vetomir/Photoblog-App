@@ -7,7 +7,7 @@ import lombok.Setter;
 public class CommentSave {
     private String content;
     private long userId;
-    private long postId;
+    private long postId =1;
 
     public CommentSave(final String content) {
         this.content = content;

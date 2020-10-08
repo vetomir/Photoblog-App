@@ -30,6 +30,8 @@ public class PostDtoMapper {
                 .commentDtos(CommentDtoMapper.mapToCommentDtos(post.getComments()))
                 /*.userName(post.getUser().getUsername)*/
                 /*.userAvatar(post.getUser().getAvatar())*/
+                .numberOfComments(post.getNumberOfComments())
+                .numberOfLikes(post.getNumberOfLikes())
                 .build();
     }
 }
