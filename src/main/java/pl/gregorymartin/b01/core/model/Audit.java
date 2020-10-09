@@ -24,10 +24,10 @@ class Audit {
     void preMerge(){
         updatedOn = LocalDateTime.now();
     }
-    public String getCreatedOnFormatted(){
-        return createdOn.format(DateTimeFormatter.ofPattern("dd LLLL yyyy hh:mm"));
+    public String formatCreatedOn(){
+        return createdOn.format(DateTimeFormatter.ofPattern("dd LLLL yyyy hh:mm a"));
     }
-    public String getUpdatedOnFormatted(){
-        return updatedOn.format(DateTimeFormatter.ofPattern("dd LLLL yyyy hh:mm"));
+    public String formatUpdatedOn(){
+        return updatedOn.format(DateTimeFormatter.ofPattern("dd LLLL yyyy hh:mm a"));
     }
 }

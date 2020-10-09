@@ -1,25 +1,13 @@
 package pl.gregorymartin.b01.application.service.post;
 
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import pl.gregorymartin.b01.core.mapping.dao.CommentSave;
-import pl.gregorymartin.b01.core.mapping.dao.PostDaoMapper;
-import pl.gregorymartin.b01.core.mapping.dao.PostSave;
-import pl.gregorymartin.b01.core.mapping.dto.PostList;
-import pl.gregorymartin.b01.core.mapping.dto.TagDto;
-import pl.gregorymartin.b01.core.model.Comment;
+import pl.gregorymartin.b01.core.mapping.PostMapper;
+import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
 import pl.gregorymartin.b01.core.model.Post;
-import pl.gregorymartin.b01.core.model.Tag;
-import pl.gregorymartin.b01.core.repository.CommentRepository;
 import pl.gregorymartin.b01.core.repository.PostRepository;
 import pl.gregorymartin.b01.core.repository.TagRepository;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public
@@ -41,8 +29,9 @@ class PostModify {
     }
 
     @Transactional
-    public Post editPostFromDao(PostSave postDao) {
-        Post postToSave = PostDaoMapper.mapDaoToEntity(postDao);
+    public Post editPostFromDao(long id, PostWriteModel postWriteModel) {
+        Post postToSave = PostMapper.mapDaoToEntity(postWriteModel);
+        postToSave.setId(id);
         return editPost(postToSave);
     }
 

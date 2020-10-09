@@ -1,4 +1,4 @@
-package pl.gregorymartin.b01.core.mapping.dto;
+package pl.gregorymartin.b01.core.mapping.model;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class CommentDto {
+public class CommentReadModel {
     private String content;
     private String userName;
     private String userAvatarUrl;

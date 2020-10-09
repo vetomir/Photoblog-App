@@ -1,9 +1,9 @@
 package pl.gregorymartin.b01.application.service.comment;
 
 import org.springframework.stereotype.Service;
-import pl.gregorymartin.b01.core.mapping.dao.CommentSave;
-import pl.gregorymartin.b01.core.mapping.dto.CommentDto;
-import pl.gregorymartin.b01.core.mapping.dto.CommentDtoMapper;
+import pl.gregorymartin.b01.core.mapping.model.CommentWriteModel;
+import pl.gregorymartin.b01.core.mapping.model.CommentReadModel;
+import pl.gregorymartin.b01.core.mapping.CommentMapper;
 import pl.gregorymartin.b01.core.model.Comment;
 import pl.gregorymartin.b01.core.model.Post;
 import pl.gregorymartin.b01.core.repository.CommentRepository;
@@ -12,7 +12,6 @@ import pl.gregorymartin.b01.core.repository.PostRepository;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public
@@ -26,18 +25,18 @@ class CommentGet {
         this.commentRepository = commentRepository;
     }
 
-    public List<CommentDto> getCommentsfromPost(long postId){
+    public List<CommentReadModel> getCommentsfromPost(long postId){
         List<Comment> comments = postRepository.findById(postId).get().getComments();
-        return CommentDtoMapper.mapToCommentDtos(comments);
+        return CommentMapper.mapToCommentDtos(comments);
     }
 
     @Transactional
-    public Comment addComment(CommentSave commentDao) {
+    public Comment addComment(CommentWriteModel commentWriteModel) {
         /*Optional<User> user = userRepository.findById(commentDao.getUserId());*/
-        Optional<Post> post = postRepository.findById(commentDao.getPostId());
+        Optional<Post> post = postRepository.findById(commentWriteModel.getPostId());
 
         if (/*user.isPresent() && */post.isPresent()){
-            Comment obj = new Comment(commentDao.getContent());
+            Comment obj = new Comment(commentWriteModel.getContent());
             obj.setPost(post.get());
             /*obj.setUser(user.get());*/
 

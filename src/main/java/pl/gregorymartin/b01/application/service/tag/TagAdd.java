@@ -1,17 +1,11 @@
 package pl.gregorymartin.b01.application.service.tag;
 
 import org.springframework.stereotype.Service;
-import pl.gregorymartin.b01.core.mapping.dao.PostDaoMapper;
-import pl.gregorymartin.b01.core.mapping.dao.PostSave;
-import pl.gregorymartin.b01.core.model.Post;
 import pl.gregorymartin.b01.core.model.Tag;
-import pl.gregorymartin.b01.core.repository.CommentRepository;
-import pl.gregorymartin.b01.core.repository.PostRepository;
 import pl.gregorymartin.b01.core.repository.TagRepository;
 
 import javax.transaction.Transactional;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public

@@ -3,21 +3,12 @@ package pl.gregorymartin.b01.application.service.post;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import pl.gregorymartin.b01.core.mapping.dao.CommentSave;
-import pl.gregorymartin.b01.core.mapping.dao.PostDaoMapper;
-import pl.gregorymartin.b01.core.mapping.dao.PostSave;
-import pl.gregorymartin.b01.core.mapping.dto.PostDtoMapper;
-import pl.gregorymartin.b01.core.mapping.dto.PostList;
-import pl.gregorymartin.b01.core.mapping.dto.PostSingle;
-import pl.gregorymartin.b01.core.mapping.dto.TagDto;
-import pl.gregorymartin.b01.core.model.Comment;
+import pl.gregorymartin.b01.core.mapping.PostMapper;
+import pl.gregorymartin.b01.core.mapping.model.PostInListReadModel;
+import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
 import pl.gregorymartin.b01.core.model.Post;
-import pl.gregorymartin.b01.core.model.Tag;
-import pl.gregorymartin.b01.core.repository.CommentRepository;
 import pl.gregorymartin.b01.core.repository.PostRepository;
-import pl.gregorymartin.b01.core.repository.TagRepository;
 
-import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -33,15 +24,15 @@ class PostGet {
         this.postRepository = postRepository;
     }
 
-    public PostSingle getPostDto(long id){
+    public PostReadModel getPostDto(long id){
         Optional<Post> post = postRepository.findById(id);
         if(post.isPresent()){
-            return PostDtoMapper.mapToPostDto(post.get());
+            return PostMapper.mapToPostDto(post.get());
         }
         else throw new IllegalArgumentException("Post is not exists");
     }
 
-    public List<PostList> getPosts(int page, Sort.Direction sort, String sortBy) {
+    public List<PostInListReadModel> getPosts(int page, Sort.Direction sort, String sortBy) {
         return postRepository.findAllAndMapToDto(
                 PageRequest.of(page, PAGE_SIZE,
                         Sort.by(sort, sortBy)
@@ -49,7 +40,7 @@ class PostGet {
         );
     }
 
-    public List<PostList> searchPosts(String query, int page, int PAGE_SIZE) {
+    public List<PostInListReadModel> searchPosts(String query, int page, int PAGE_SIZE) {
         String[] queryArray = query.split(" ");
 
         List<Post> result = new ArrayList<>();
@@ -58,9 +49,9 @@ class PostGet {
                     .filter(x -> x.getDescription().toUpperCase().contains(q.toUpperCase()))
                     .forEach(result::add);
         }
-        List<PostList> resultDto = result.stream()
+        List<PostInListReadModel> resultDto = result.stream()
                 .distinct()
-                .map(x -> new PostList(x.getDescription(), x.getPhotoUrl(), x.getCreatedOn(), x.getNumberOfComments(), x.getNumberOfLikes(), true))
+                .map(x -> new PostInListReadModel(x.getDescription(), x.getPhotoUrl(), x.getCreatedOn(), x.getNumberOfComments(), x.getNumberOfLikes(), true))
                 .collect(Collectors.toList());
 
 

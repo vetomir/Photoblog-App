@@ -4,12 +4,14 @@ package pl.gregorymartin.b01.core.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
+import pl.gregorymartin.b01.security.model.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -33,30 +35,31 @@ public class Post extends Audit {
     @JoinTable(
             name = "posts_tags",
             joinColumns = @JoinColumn(
-                    name = "posts_id", referencedColumnName = "id"),
+                    name = "postId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
-                    name = "tags_id", referencedColumnName = "id"))
+                    name = "tagId", referencedColumnName = "id"))
     private List<Tag> tags = new ArrayList<>();
 
-    @OneToMany//(cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "postId", insertable = false)
-    private List<Comment> comments = new ArrayList<>();
 
-/*    @JsonBackReference
+
+    @JsonBackReference
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "posts_rates",
             joinColumns = @JoinColumn(
-                    name = "posts_id", referencedColumnName = "id"),
+                    name = "postId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
-                    name = "rates_id", referencedColumnName = "id"))
-    private Set<Rate> rates = new HashSet<>();*/
+                    name = "categoryId", referencedColumnName = "id"))
+    private Set<Rate> rates = new HashSet<>();
 
+    @OneToMany//(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "postId",  insertable = false)
+    private List<Comment> comments;
 
-/*    @JsonBackReference
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name = "userId", updatable = false)
-    private User user;*/
+    private User user;
 
     public Post() {
         this.tags.add(new Tag("ugabuga"));

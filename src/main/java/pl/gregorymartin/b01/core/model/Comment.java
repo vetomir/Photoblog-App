@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import pl.gregorymartin.b01.security.model.User;
+
 import javax.persistence.Entity;
 
 import javax.persistence.*;
@@ -21,10 +23,10 @@ public class Comment extends Audit {
     private long id;
     private String content;
 
-/*    @JsonBackReference
+    @JsonBackReference
     @ManyToOne//(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "userId", updatable = false)
-    private User user;*/
+    private User user;
 
     @JsonBackReference
     @ManyToOne//(cascade = CascadeType.REMOVE)

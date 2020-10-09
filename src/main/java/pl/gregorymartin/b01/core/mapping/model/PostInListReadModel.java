@@ -1,4 +1,4 @@
-package pl.gregorymartin.b01.core.mapping.dto;
+package pl.gregorymartin.b01.core.mapping.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
 @Getter
 @Setter
-public class PostList {
+public class PostInListReadModel {
     private String description;
     private String photoUrl;
     private String createdOn;
@@ -23,7 +23,7 @@ public class PostList {
     private boolean presentUser;
 
 
-    public PostList(final String description, final String photoUrl, final LocalDateTime createdOn, final int numberOfComments, final int numberOfLikes, final boolean presentUser) {
+    public PostInListReadModel(final String description, final String photoUrl, final LocalDateTime createdOn, final int numberOfComments, final int numberOfLikes, final boolean presentUser) {
         this.description = description;
         this.photoUrl = photoUrl;
         this.createdOn = getCreatedOnFormatted(createdOn);
@@ -37,6 +37,6 @@ public class PostList {
         this.presentUser = presentUser;
     }
     public String getCreatedOnFormatted(LocalDateTime date){
-        return date.format(DateTimeFormatter.ofPattern("dd LLLL yyyy hh:mm"));
+        return date.format(DateTimeFormatter.ofPattern("dd LLLL yyyy hh:mm a"));
     }
 }

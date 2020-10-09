@@ -2,8 +2,8 @@ package pl.gregorymartin.b01.application.service.post;
 
 import org.springframework.stereotype.Service;
 import pl.gregorymartin.b01.application.service.tag.TagAdd;
-import pl.gregorymartin.b01.core.mapping.dao.PostDaoMapper;
-import pl.gregorymartin.b01.core.mapping.dao.PostSave;
+import pl.gregorymartin.b01.core.mapping.PostMapper;
+import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
 import pl.gregorymartin.b01.core.model.Post;
 import pl.gregorymartin.b01.core.repository.CommentRepository;
 import pl.gregorymartin.b01.core.repository.PostRepository;
@@ -41,8 +41,8 @@ class PostAdd {
 
         return postRepository.save(post);
     }
-    public Post addPostFromDao(PostSave postDao) {
-        Post postToSave = PostDaoMapper.mapDaoToEntity(postDao);
+    public Post addPostFromDao(PostWriteModel postWriteModel) {
+        Post postToSave = PostMapper.mapDaoToEntity(postWriteModel);
         return addPost(postToSave);
     }
 }

@@ -1,19 +1,15 @@
-package pl.gregorymartin.b01.core.mapping.dto;
+package pl.gregorymartin.b01.core.mapping.model;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import pl.gregorymartin.b01.core.model.Comment;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
 @Builder
-public class PostSingle {
+public class PostReadModel {
     private String description;
     private String photoUrl;
     private String createdOn;
@@ -22,7 +18,7 @@ public class PostSingle {
     private String userName;
     private String userAvatar;
 
-    private List<CommentDto> commentDtos;
+    private List<CommentReadModel> commentReadModels;
 
     private int numberOfComments;
     private int numberOfLikes;
