@@ -4,14 +4,17 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 @Builder
 public
-class UserWriteModel {
+class UserReadModel {
+    private Long id;
+    private String name;
     //email is username
     private String email;
-    private String password;
-    private String password2;
-    private String role;
+    private String avatar;
+    private List<String> roles;
 }

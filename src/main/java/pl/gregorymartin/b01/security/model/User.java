@@ -39,7 +39,7 @@ public class User extends Audit implements UserDetails {
     @NotBlank
     @Email
     private String email;
-    private String photoUrl;
+    private String avatar;
     private boolean isEnabled;
 
     @OneToMany//(cascade = CascadeType.REMOVE)
@@ -74,7 +74,7 @@ public class User extends Audit implements UserDetails {
     }
 
     private void setDefaultPhoto(){
-        this.photoUrl = "https://p1.hiclipart.com/preview/571/108/16/person-silhouette-shadow-man-shadow-person-human-portrait-face-png-clipart.jpg";
+        this.avatar = "https://p1.hiclipart.com/preview/571/108/16/person-silhouette-shadow-man-shadow-person-human-portrait-face-png-clipart.jpg";
     }
     public int getNumberOfLikes(){
         return getRate().getPosts().size();

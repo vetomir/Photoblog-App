@@ -8,7 +8,7 @@ import lombok.Setter;
 public class CommentWriteModel {
     private String content;
     private long userId;
-    private long postId;
+    private long postId = 1;
 
     public CommentWriteModel(final String content) {
         this.content = content;

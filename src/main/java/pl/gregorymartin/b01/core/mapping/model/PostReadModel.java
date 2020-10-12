@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 @Builder
 public class PostReadModel {
+    private Long id;
     private String description;
     private String photoUrl;
     private String createdOn;

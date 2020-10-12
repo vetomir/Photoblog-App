@@ -31,14 +31,10 @@ class TestController {
         this.addPost = addPost;
         this.commentAdd = commentAdd;
 
-        addPost.addPostFromDao(new PostWriteModel("afdsasgagd", "dsfsghfg #CHUJ"));
-        addPost.addPostFromDao(new PostWriteModel("afdsgasfad", "dsfsghfg #pizda"));
-        addPost.addPostFromDao(new PostWriteModel("afdsgasdgd", "dsfsghfg #Cipa"));
-        sqlPostRepository.save(new Post("Elsao", "asdfdsgg"));
-        sqlPostRepository.save(new Post("Elasgo", "asddsfsfg"));
-        sqlPostRepository.save(new Post("Elo", "elo"));
-        sqlPostRepository.save(new Post("Elasfo", "elo"));
-        commentAdd.addComment(new CommentWriteModel("elo"));
+        addPost.addPostFromDao(new PostWriteModel("!!!!!sa!!!!!!!dfafhaf!!!!!!!", "dsfsghfg #CHUJ"));
+        addPost.addPostFromDao(new PostWriteModel("dsasasfs", "dssadasfsghfg #pizda"));
+        addPost.addPostFromDao(new PostWriteModel("!!!!!!!as!!!dfdsa!!!!!", "dsfsghfg #Cipa"));
+        commentAdd.addComment(new CommentWriteModel("sadfsdaafdsfSsd"));
     }
 
     @GetMapping("/all")

@@ -64,6 +64,7 @@ public class PostMapper {
     public static PostReadModel mapToPostDto(Post post) {
 
         return PostReadModel.builder()
+                .id(post.getId())
                 .description(post.getDescription())
                 .photoUrl(post.getPhotoUrl())
                 .tags(post.getTags().stream()

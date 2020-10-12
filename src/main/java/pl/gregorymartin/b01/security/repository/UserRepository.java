@@ -9,10 +9,12 @@ import java.util.Optional;
 
 public interface UserRepository {
     List<User> findAll();
+    List<User> findAll(Pageable pageable);
 
     User findAllByUsername(String username);
     User findByName(String name);
     Optional<User> findById(long id);
+    User save(User user);
 
 
     List<Post> findAllPostsByUser_Name(String name, Pageable page);

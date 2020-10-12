@@ -43,8 +43,8 @@ class PostController {
     }
 
     @PostMapping("/posts")
-    public ResponseEntity<Post> addPost(@RequestBody PostWriteModel post/*, @RequestParam(name = "user-id") long userId*/) {
-        Post result = postAdd.addPostFromDao(post);
+    public ResponseEntity<PostReadModel> addPost(@RequestBody PostWriteModel post/*, @RequestParam(name = "user-id") long userId*/) {
+        PostReadModel result = postAdd.addPostFromDao(post);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 

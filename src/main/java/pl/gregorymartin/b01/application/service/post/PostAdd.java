@@ -3,6 +3,7 @@ package pl.gregorymartin.b01.application.service.post;
 import org.springframework.stereotype.Service;
 import pl.gregorymartin.b01.application.service.tag.TagAdd;
 import pl.gregorymartin.b01.core.mapping.PostMapper;
+import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
 import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
 import pl.gregorymartin.b01.core.model.Post;
 import pl.gregorymartin.b01.core.repository.CommentRepository;
@@ -29,7 +30,7 @@ class PostAdd {
 
 
 
-    public Post addPost(Post post) {
+    public PostReadModel addPost(Post post) {
         /*post.setUser(userRepository.findById(authorId).get());*/
 
         post.setTags(
@@ -39,9 +40,9 @@ class PostAdd {
 /*        User user = userRepository.findById(authorId).get();
         userRepository.save(user);*/
 
-        return postRepository.save(post);
+        return PostMapper.mapToPostDto(postRepository.save(post));
     }
-    public Post addPostFromDao(PostWriteModel postWriteModel) {
+    public PostReadModel addPostFromDao(PostWriteModel postWriteModel) {
         Post postToSave = PostMapper.mapDaoToEntity(postWriteModel);
         return addPost(postToSave);
     }
