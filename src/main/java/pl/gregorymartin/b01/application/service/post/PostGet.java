@@ -27,7 +27,7 @@ class PostGet {
     public PostReadModel getPostDto(long id){
         Optional<Post> post = postRepository.findById(id);
         if(post.isPresent()){
-            return PostMapper.mapToPostDto(post.get());
+            return PostMapper.mapPostEntityToPostReadModel(post.get());
         }
         else throw new IllegalArgumentException("Post is not exists");
     }

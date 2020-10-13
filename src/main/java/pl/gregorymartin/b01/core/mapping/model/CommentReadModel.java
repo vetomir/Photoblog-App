@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @Builder
 public class CommentReadModel {
+    private long id;
     private String content;
     private String userName;
     private String userAvatarUrl;

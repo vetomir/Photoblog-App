@@ -7,6 +7,7 @@ import pl.gregorymartin.b01.application.service.comment.CommentModify;
 import pl.gregorymartin.b01.application.service.post.PostAdd;
 import pl.gregorymartin.b01.application.service.post.PostGet;
 import pl.gregorymartin.b01.application.service.post.PostModify;
+import pl.gregorymartin.b01.core.mapping.model.CommentReadModel;
 import pl.gregorymartin.b01.core.mapping.model.CommentWriteModel;
 import pl.gregorymartin.b01.core.model.Comment;
 
@@ -29,8 +30,8 @@ class CommentController {
         this.commentModify = commentModify;
     }
     @PostMapping("/comments")
-    public ResponseEntity<Comment> addComment(@RequestBody CommentWriteModel comment) {
-        Comment result = commentAdd.addComment(comment);
+    public ResponseEntity<CommentReadModel> addComment(@RequestBody CommentWriteModel comment) {
+        CommentReadModel result = commentAdd.addComment(comment);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 

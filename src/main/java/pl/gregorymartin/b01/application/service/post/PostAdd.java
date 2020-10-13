@@ -40,10 +40,10 @@ class PostAdd {
 /*        User user = userRepository.findById(authorId).get();
         userRepository.save(user);*/
 
-        return PostMapper.mapToPostDto(postRepository.save(post));
+        return PostMapper.mapPostEntityToPostReadModel(postRepository.save(post));
     }
     public PostReadModel addPostFromDao(PostWriteModel postWriteModel) {
-        Post postToSave = PostMapper.mapDaoToEntity(postWriteModel);
+        Post postToSave = PostMapper.mapPostWriteModelsToEntities(postWriteModel);
         return addPost(postToSave);
     }
 }

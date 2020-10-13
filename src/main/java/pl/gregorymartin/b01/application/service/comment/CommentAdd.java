@@ -1,6 +1,8 @@
 package pl.gregorymartin.b01.application.service.comment;
 
 import org.springframework.stereotype.Service;
+import pl.gregorymartin.b01.core.mapping.CommentMapper;
+import pl.gregorymartin.b01.core.mapping.model.CommentReadModel;
 import pl.gregorymartin.b01.core.mapping.model.CommentWriteModel;
 import pl.gregorymartin.b01.core.model.Comment;
 import pl.gregorymartin.b01.core.model.Post;
@@ -26,7 +28,7 @@ class CommentAdd {
     }
 
     @Transactional
-    public Comment addComment(CommentWriteModel commentWriteModel) {
+    public CommentReadModel addComment(CommentWriteModel commentWriteModel) {
         /*Optional<User> appUser = userRepository.findById(commentWriteModel.getUserId());*/
         Optional<Post> post = postRepository.findById(commentWriteModel.getPostId());
 
@@ -38,7 +40,7 @@ class CommentAdd {
             post.get().setNumberOfComments(obj.getPost().getComments().size() + 1);
             postRepository.save(post.get());
 
-            return commentRepository.save(obj);
+            return CommentMapper.mapToCommentReadModel(commentRepository.save(obj));
         }
         else
             return null;

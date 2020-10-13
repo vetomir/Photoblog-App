@@ -48,13 +48,11 @@ class PostController {
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 
-
     @PatchMapping("/posts")
     public ResponseEntity<Post> updatePost(@RequestParam long id, @RequestBody PostWriteModel post/*, @RequestParam(name = "user-id") long userId*/) {
         Post result = postModify.editPostFromDao(id, post);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
-
 
     @DeleteMapping("/posts")
     public ResponseEntity deletePost(@RequestParam long id) {

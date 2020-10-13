@@ -10,6 +10,7 @@ import lombok.Setter;
 public
 class UserWriteModel {
     //email is username
+    private long id;
     private String email;
     private String password;
     private String password2;

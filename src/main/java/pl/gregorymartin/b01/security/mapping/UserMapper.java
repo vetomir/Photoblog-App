@@ -2,17 +2,12 @@ package pl.gregorymartin.b01.security.mapping;
 
 
 import lombok.RequiredArgsConstructor;
-import pl.gregorymartin.b01.core.mapping.CommentMapper;
-import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
-import pl.gregorymartin.b01.core.model.Post;
-import pl.gregorymartin.b01.core.model.Tag;
-import pl.gregorymartin.b01.security.mapping.model.RoleReadModel;
+import org.springframework.data.domain.Page;
 import pl.gregorymartin.b01.security.mapping.model.UserReadModel;
 import pl.gregorymartin.b01.security.mapping.model.UserWriteModel;
 import pl.gregorymartin.b01.security.model.Role;
 import pl.gregorymartin.b01.security.model.User;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,17 +17,18 @@ public class UserMapper {
 
 
     //create
-    public static List<User> mapDaosToEntity(List<UserWriteModel> userDaos) {
+    public static List<User> mapUserWriteModelsToUserEntities(List<UserWriteModel> userDaos) {
         return userDaos.stream()
-                .map(user -> mapDaoToEntity(user))
+                .map(UserMapper::mapUserWriteModelToUserEntity)
                 .collect(Collectors.toList());
     }
 
-    public static User mapDaoToEntity(UserWriteModel userDao) {
+    public static User mapUserWriteModelToUserEntity(UserWriteModel userDao) {
         if(userDao.getPassword2().equals(userDao.getPassword())){
             User user = new User();
             user.setUsername(userDao.getEmail());
             user.setRoles(Collections.singleton(new Role("USER_ROLE")));
+            user.setPassword(user.getPassword());
 
             return user;
         }
@@ -41,12 +37,12 @@ public class UserMapper {
     }
     //read
 
-    public static List<UserReadModel> mapToUserReadModels(List<User> userList){
+    public static List<UserReadModel> mapUserEntitiesToUserReadModels(Page<User> userList){
         return userList.stream()
-                .map(UserMapper::mapToUserReadModel)
+                .map(UserMapper::mapUserEntityToUserReadModel)
                 .collect(Collectors.toList());
     }
-    public static UserReadModel mapToUserReadModel(User user) {
+    public static UserReadModel mapUserEntityToUserReadModel(User user) {
 
         return UserReadModel.builder()
                 .id(user.getId())

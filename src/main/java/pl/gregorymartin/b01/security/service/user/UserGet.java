@@ -1,4 +1,4 @@
-package pl.gregorymartin.b01.security.service;
+package pl.gregorymartin.b01.security.service.user;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -20,7 +20,7 @@ class UserGet {
     }
 
     public List<UserReadModel> getUsers(int page, Sort.Direction sort, String sortBy){
-        return UserMapper.mapToUserReadModels(userRepository.findAll(
+        return UserMapper.mapUserEntitiesToUserReadModels(userRepository.findAll(
                 PageRequest.of(page, PAGE_SIZE,
                         Sort.by(sort, sortBy)
                 )

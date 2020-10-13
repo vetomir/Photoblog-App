@@ -27,7 +27,7 @@ class CommentGet {
 
     public List<CommentReadModel> getCommentsfromPost(long postId){
         List<Comment> comments = postRepository.findById(postId).get().getComments();
-        return CommentMapper.mapToCommentDtos(comments);
+        return CommentMapper.mapToCommentReadModels(comments);
     }
 
     @Transactional

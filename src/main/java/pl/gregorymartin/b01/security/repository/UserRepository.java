@@ -1,5 +1,6 @@
 package pl.gregorymartin.b01.security.repository;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import pl.gregorymartin.b01.core.model.Post;
 import pl.gregorymartin.b01.security.model.User;
@@ -9,7 +10,7 @@ import java.util.Optional;
 
 public interface UserRepository {
     List<User> findAll();
-    List<User> findAll(Pageable pageable);
+    Page<User> findAll(Pageable pageable);
 
     User findAllByUsername(String username);
     User findByName(String name);
@@ -18,4 +19,6 @@ public interface UserRepository {
 
 
     List<Post> findAllPostsByUser_Name(String name, Pageable page);
+
+    void deleteById(long id);
 }

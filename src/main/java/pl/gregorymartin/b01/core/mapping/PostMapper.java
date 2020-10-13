@@ -17,18 +17,18 @@ public class PostMapper {
 
 
     //create
-    public static List<Post> mapDaoToEntity(List<PostWriteModel> postsDao) {
+    public static List<Post> mapPostWriteModelsToEntities(List<PostWriteModel> postsDao) {
         return postsDao.stream()
-                .map(post -> mapDaoToEntity(post))
+                .map(PostMapper::mapPostWriteModelsToEntities)
                 .collect(Collectors.toList());
     }
 
-    public static Post mapDaoToEntity(PostWriteModel postWriteModel) {
+    public static Post mapPostWriteModelsToEntities(PostWriteModel postWriteModel) {
         Post mappedPost = new Post();
         mappedPost.setDescription(postWriteModel.getDescription());
         mappedPost.setPhotoUrl(postWriteModel.getPhotoUrl());
 
-        postWriteModel.setTags(tagsFromContent(postWriteModel.getDescription()));
+        postWriteModel.setTags(mapHashTagsFromContentToTagEntities(postWriteModel.getDescription()));
         mappedPost.setTags(
                 postWriteModel.getTags().stream()
                         .filter(x -> !x.isBlank())
@@ -40,7 +40,7 @@ public class PostMapper {
         return mappedPost;
     }
 
-    private static List<String> tagsFromContent(String content) {
+    private static List<String> mapHashTagsFromContentToTagEntities(String content) {
         String text = content;
         String[] words = text.split(" ");
         List<String> tags = new ArrayList<String>();
@@ -55,13 +55,13 @@ public class PostMapper {
 
     //read
 
-    public static List<PostReadModel> mapToPostDtos(List<Post> posts) {
+    public static List<PostReadModel> mapPostEntitiesToPostReadModels(List<Post> posts) {
         return posts.stream()
-                .map(PostMapper::mapToPostDto)
+                .map(PostMapper::mapPostEntityToPostReadModel)
                 .collect(Collectors.toList());
     }
 
-    public static PostReadModel mapToPostDto(Post post) {
+    public static PostReadModel mapPostEntityToPostReadModel(Post post) {
 
         return PostReadModel.builder()
                 .id(post.getId())
@@ -71,7 +71,7 @@ public class PostMapper {
                         .map(Tag::getTitle)
                         .collect(Collectors.toList()))
                 .createdOn(post.formatCreatedOn())
-                .commentReadModels(CommentMapper.mapToCommentDtos(post.getComments()))
+                .commentReadModels(CommentMapper.mapToCommentReadModels(post.getComments()))
                 /*.userName(post.getUser().getUsername)*/
                 /*.userAvatar(post.getUser().getAvatar())*/
                 .numberOfComments(post.getNumberOfComments())

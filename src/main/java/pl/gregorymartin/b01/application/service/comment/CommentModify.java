@@ -30,7 +30,7 @@ class CommentModify {
 
     @Transactional
     public Comment editCommentFromDao(long id, CommentWriteModel commentWriteModel) {
-        Comment commentToSave = CommentMapper.mapDaoToEntity(commentWriteModel);
+        Comment commentToSave = CommentMapper.mapCommentWriteModelToEntity(commentWriteModel);
         commentToSave.setId(id);
         return editComment(commentToSave);
     }

@@ -8,4 +8,5 @@ public interface RoleRepository {
     Optional<Role> findByName(String nameOfRole);
     boolean existsByName(String roleName);
     Role save(Role role);
+    void deleteById(long id);
 }

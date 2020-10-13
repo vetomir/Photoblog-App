@@ -1,4 +1,4 @@
-package pl.gregorymartin.b01.security.service;
+package pl.gregorymartin.b01.security.service.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

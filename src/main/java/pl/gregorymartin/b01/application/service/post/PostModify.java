@@ -30,7 +30,7 @@ class PostModify {
 
     @Transactional
     public Post editPostFromDao(long id, PostWriteModel postWriteModel) {
-        Post postToSave = PostMapper.mapDaoToEntity(postWriteModel);
+        Post postToSave = PostMapper.mapPostWriteModelsToEntities(postWriteModel);
         postToSave.setId(id);
         return editPost(postToSave);
     }
