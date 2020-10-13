@@ -1,18 +1,22 @@
 package pl.gregorymartin.b01.security.mapping.model;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-@Builder
 public
 class UserWriteModel {
-    //email is username
     private long id;
+    //email is username
     private String email;
     private String password;
     private String password2;
     private String role;
+
+    public UserWriteModel(final String email, final String password, final String password2) {
+        this.email = email;
+        this.password = password;
+        this.password2 = password2;
+    }
 }

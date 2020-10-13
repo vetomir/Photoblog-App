@@ -27,7 +27,6 @@ public class UserMapper {
         if(userDao.getPassword2().equals(userDao.getPassword())){
             User user = new User();
             user.setUsername(userDao.getEmail());
-            user.setRoles(Collections.singleton(new Role("USER_ROLE")));
             user.setPassword(user.getPassword());
 
             return user;
@@ -47,9 +46,10 @@ public class UserMapper {
         return UserReadModel.builder()
                 .id(user.getId())
                 .name(user.getName())
+                .email(user.getUsername())
                 .avatar(user.getAvatar())
-                .roles(user.getRoles().stream().map(x -> x.getName()).collect(Collectors.toList()))
-                .email(user.getEmail())
+                .createdOn(user.formatCreatedOn())
+                .roles(user.getRoles().stream().map(Role::getName).collect(Collectors.toList()))
                 .build();
     }
 }

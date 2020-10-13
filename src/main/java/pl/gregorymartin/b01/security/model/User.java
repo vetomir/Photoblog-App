@@ -33,12 +33,10 @@ public class User extends Audit implements UserDetails {
     @NotBlank
     private String name;
     @NotBlank
+    @Email
     private String username;
     @NotBlank
     private String password;
-    @NotBlank
-    @Email
-    private String email;
     private String avatar;
     private boolean isEnabled;
 
@@ -63,11 +61,10 @@ public class User extends Audit implements UserDetails {
                     name = "role_id", referencedColumnName = "id"))
     Set<Role> roles;
 
-    public User(String name, String username, String password, String email) {
+    public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;
-        this.email = email;
         setDefaultPhoto();
         roles = new HashSet<>();
         this.isEnabled = true;
@@ -123,6 +120,5 @@ public class User extends Audit implements UserDetails {
     public void toUpdate(User toUpdate){
         this.name = toUpdate.name;
         this.username = toUpdate.username;
-        this.email = toUpdate.email;
     }
 }

@@ -62,22 +62,15 @@ class PostMapperSpec {
     @Test
     void should_mapPostEntityToPostReadModel_andReturnsGivenEntity() {
         //given
-        PostRepository repositoryMock = mock(PostRepository.class);
         User user = new User();
-        user.setName("ugabuga");
-        user.setEmail("ugabuga@test.com");
-
+        user.setName("ugabuga@test.com");
+        //and
         Post post = new Post("Post","test.pl/test.jpg");
         post.setUser(user);
         post.setTags(List.of(new Tag("test")));
-
         post.setCreatedOn(LocalDateTime.now());
-        given(repositoryMock.save(post)).willReturn(post);
-
         //when
-        Post savedPost = repositoryMock.save(post);
-        PostReadModel postReadModel = PostMapper.mapPostEntityToPostReadModel(savedPost);
-
+        PostReadModel postReadModel = PostMapper.mapPostEntityToPostReadModel(post);
         //then
         Assert.assertEquals(post.getDescription(), postReadModel.getDescription());
         Assert.assertEquals(post.getUser().getName(), postReadModel.getUserName());

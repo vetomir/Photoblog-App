@@ -8,8 +8,11 @@ import java.util.List;
 
 @Setter
 @Getter
-@Builder
 public
 class RoleWriteModel {
     private String name;
+
+    public RoleWriteModel(final String name) {
+        this.name = name;
+    }
 }

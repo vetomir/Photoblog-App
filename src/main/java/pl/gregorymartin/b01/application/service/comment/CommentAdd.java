@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 public
 class CommentAdd {
-    private static final int PAGE_SIZE = 25;
+
     private PostRepository postRepository;
     private CommentRepository commentRepository;
     private UserRepository userRepository;

@@ -17,4 +17,5 @@ class UserReadModel {
     private String email;
     private String avatar;
     private List<String> roles;
+    private String createdOn;
 }

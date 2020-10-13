@@ -22,7 +22,7 @@ class UserModify {
     @Transactional
     public UserReadModel changeUserEmail(UserWriteModel userWriteModel){
         Optional<User> user = userRepository.findById(userWriteModel.getId());
-        user.get().setEmail(userWriteModel.getEmail());
+        user.get().setUsername(userWriteModel.getEmail());
         return UserMapper.mapUserEntityToUserReadModel(userRepository.save(user.get()));
 
     }
