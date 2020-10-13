@@ -17,13 +17,13 @@ public class PostMapper {
 
 
     //create
-    public static List<Post> mapPostWriteModelsToEntities(List<PostWriteModel> postsDao) {
+    public static List<Post> mapPostWriteModelsToEntity(List<PostWriteModel> postsDao) {
         return postsDao.stream()
-                .map(PostMapper::mapPostWriteModelsToEntities)
+                .map(PostMapper::mapPostWriteModelsToEntity)
                 .collect(Collectors.toList());
     }
 
-    public static Post mapPostWriteModelsToEntities(PostWriteModel postWriteModel) {
+    public static Post mapPostWriteModelsToEntity(PostWriteModel postWriteModel) {
         Post mappedPost = new Post();
         mappedPost.setDescription(postWriteModel.getDescription());
         mappedPost.setPhotoUrl(postWriteModel.getPhotoUrl());
@@ -55,7 +55,7 @@ public class PostMapper {
 
     //read
 
-    public static List<PostReadModel> mapPostEntitiesToPostReadModels(List<Post> posts) {
+    public static List<PostReadModel> mapPostEntityToPostReadModel(List<Post> posts) {
         return posts.stream()
                 .map(PostMapper::mapPostEntityToPostReadModel)
                 .collect(Collectors.toList());
@@ -71,9 +71,9 @@ public class PostMapper {
                         .map(Tag::getTitle)
                         .collect(Collectors.toList()))
                 .createdOn(post.formatCreatedOn())
-                .commentReadModels(CommentMapper.mapToCommentReadModels(post.getComments()))
-                /*.userName(post.getUser().getUsername)*/
-                /*.userAvatar(post.getUser().getAvatar())*/
+                .commentReadModels(CommentMapper.mapEntityToCommentReadModel(post.getComments()))
+                .userName(post.getUser().getName())
+                .userAvatar(post.getUser().getAvatar())
                 .numberOfComments(post.getNumberOfComments())
                 .numberOfLikes(post.getNumberOfLikes())
                 .build();

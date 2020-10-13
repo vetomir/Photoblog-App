@@ -17,7 +17,7 @@ public class UserMapper {
 
 
     //create
-    public static List<User> mapUserWriteModelsToUserEntities(List<UserWriteModel> userDaos) {
+    public static List<User> mapUserWriteModelToUserEntity(List<UserWriteModel> userDaos) {
         return userDaos.stream()
                 .map(UserMapper::mapUserWriteModelToUserEntity)
                 .collect(Collectors.toList());
@@ -37,7 +37,7 @@ public class UserMapper {
     }
     //read
 
-    public static List<UserReadModel> mapUserEntitiesToUserReadModels(Page<User> userList){
+    public static List<UserReadModel> mapUserEntityToUserReadModel(Page<User> userList){
         return userList.stream()
                 .map(UserMapper::mapUserEntityToUserReadModel)
                 .collect(Collectors.toList());

@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 public class RoleMapper {
 
     //read
-    public static List<RoleReadModel> mapRoleEntitiesToRoleReadModels(List<Role> roleList){
+    public static List<RoleReadModel> mapRoleEntityToRoleReadModel(List<Role> roleList){
         return roleList.stream()
-                .map(RoleMapper::mapRoleEntitiesToRoleReadModels)
+                .map(RoleMapper::mapRoleEntityToRoleReadModel)
                 .collect(Collectors.toList());
     }
-    public static RoleReadModel mapRoleEntitiesToRoleReadModels(Role role) {
+    public static RoleReadModel mapRoleEntityToRoleReadModel(Role role) {
         return RoleReadModel.builder()
                 .id(role.getId())
                 .name(role.getName())
@@ -28,7 +28,7 @@ public class RoleMapper {
     }
 
     //save
-    public static List<Role> mapRoleWriteModelsToRoleEntities(List<RoleWriteModel> roleDaos) {
+    public static List<Role> mapRoleWriteModelToRoleEntity(List<RoleWriteModel> roleDaos) {
         return roleDaos.stream()
                 .map(RoleMapper::mapRoleWriteModelToRoleEntity)
                 .collect(Collectors.toList());

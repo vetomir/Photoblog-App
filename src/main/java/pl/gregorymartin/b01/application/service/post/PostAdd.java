@@ -43,7 +43,7 @@ class PostAdd {
         return PostMapper.mapPostEntityToPostReadModel(postRepository.save(post));
     }
     public PostReadModel addPostFromDao(PostWriteModel postWriteModel) {
-        Post postToSave = PostMapper.mapPostWriteModelsToEntities(postWriteModel);
+        Post postToSave = PostMapper.mapPostWriteModelsToEntity(postWriteModel);
         return addPost(postToSave);
     }
 }

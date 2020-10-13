@@ -62,7 +62,7 @@ public class Post extends Audit {
     private User user;
 
     public Post() {
-        this.tags.add(new Tag("ugabuga"));
+        this.tags.add(new Tag("test"));
     }
 
     public Post(String description, String photoUrl) {

@@ -20,7 +20,7 @@ class UserGet {
     }
 
     public List<UserReadModel> getUsers(int page, Sort.Direction sort, String sortBy){
-        return UserMapper.mapUserEntitiesToUserReadModels(userRepository.findAll(
+        return UserMapper.mapUserEntityToUserReadModel(userRepository.findAll(
                 PageRequest.of(page, PAGE_SIZE,
                         Sort.by(sort, sortBy)
                 )

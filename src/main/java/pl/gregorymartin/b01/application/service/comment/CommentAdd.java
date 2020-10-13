@@ -8,6 +8,7 @@ import pl.gregorymartin.b01.core.model.Comment;
 import pl.gregorymartin.b01.core.model.Post;
 import pl.gregorymartin.b01.core.repository.CommentRepository;
 import pl.gregorymartin.b01.core.repository.PostRepository;
+import pl.gregorymartin.b01.security.model.User;
 import pl.gregorymartin.b01.security.repository.UserRepository;
 
 import javax.transaction.Transactional;
@@ -29,18 +30,18 @@ class CommentAdd {
 
     @Transactional
     public CommentReadModel addComment(CommentWriteModel commentWriteModel) {
-        /*Optional<User> appUser = userRepository.findById(commentWriteModel.getUserId());*/
+        Optional<User> user = userRepository.findById(commentWriteModel.getUserId());
         Optional<Post> post = postRepository.findById(commentWriteModel.getPostId());
 
-        if (/*user.isPresent() && */post.isPresent()){
+        if (user.isPresent() && post.isPresent()){
             Comment obj = new Comment(commentWriteModel.getContent());
-            /*obj.setUser(user.get());*/
+            obj.setUser(user.get());
             obj.setPost(post.get());
 
             post.get().setNumberOfComments(obj.getPost().getComments().size() + 1);
             postRepository.save(post.get());
 
-            return CommentMapper.mapToCommentReadModel(commentRepository.save(obj));
+            return CommentMapper.mapEntityToCommentReadModel(commentRepository.save(obj));
         }
         else
             return null;

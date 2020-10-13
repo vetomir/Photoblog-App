@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CommentMapper {
 
-    public static List<Comment> mapCommentWriteModelsToEntities(List<CommentWriteModel> commentsDao) {
+    public static List<Comment> mapCommentWriteModelToEntity(List<CommentWriteModel> commentsDao) {
         return commentsDao.stream()
                 .map(CommentMapper::mapCommentWriteModelToEntity)
                 .collect(Collectors.toList());
@@ -27,23 +27,23 @@ public class CommentMapper {
         return mappedComment;
     }
 
-    public static List<CommentReadModel> mapToCommentReadModels(List<Comment> comments) {
+    public static List<CommentReadModel> mapEntityToCommentReadModel(List<Comment> comments) {
         if(comments != null){
             return comments.stream()
-                    .map(CommentMapper::mapToCommentReadModel)
+                    .map(CommentMapper::mapEntityToCommentReadModel)
                     .collect(Collectors.toList());
         }
         return new ArrayList<>();
     }
 
-    public static CommentReadModel mapToCommentReadModel(Comment comment) {
+    public static CommentReadModel mapEntityToCommentReadModel(Comment comment) {
 
         return CommentReadModel.builder()
                 .id(comment.getId())
                 .content(comment.getContent())
                 .createdOn(comment.formatCreatedOn())
-                /*.userName(comment.getUser().getUsername)
-                .userAvatarUrl(comment.getUser().getAvatar())*/
+                .userName(comment.getUser().getName())
+                .userAvatarUrl(comment.getUser().getAvatar())
                 .build();
     }
 }
