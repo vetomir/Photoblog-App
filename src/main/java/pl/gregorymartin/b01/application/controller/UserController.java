@@ -16,7 +16,8 @@ import pl.gregorymartin.b01.security.service.user.UserModify;
 import java.net.URI;
 import java.util.List;
 
-@RestController("/api")
+@RestController
+@RequestMapping("/api/users")
 class UserController {
     private UserGet userGet;
     private UserAdd userAdd;
@@ -32,7 +33,7 @@ class UserController {
         this.roleModify = roleModify;
     }
 
-    @GetMapping("/users/all")
+    @GetMapping("/all")
     public ResponseEntity<List<UserReadModel>> getUsers(@RequestParam(required = false) Integer page, Sort.Direction sort, String sortBy
             /*@AuthenticationPrincipal UsernamePasswordAuthenticationToken user*/) {
         int pageNumber = page != null && page >= 0 ? page : 0;
@@ -42,20 +43,20 @@ class UserController {
         return ResponseEntity.ok(userGet.getUsers(pageNumber, sortDirection, sortByVariable));
     }
 
-    @PostMapping("/users")
-    public ResponseEntity<UserReadModel> addUser(@RequestBody UserWriteModel user) {
+    @PostMapping
+    public ResponseEntity<UserReadModel> createUser(@RequestBody UserWriteModel user) {
         UserReadModel result = userAdd.registerUser(user);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 
-    @PatchMapping("/users")
-    public ResponseEntity<UserReadModel> modifyUser(@RequestBody UserWriteModel user) {
+    @PatchMapping
+    public ResponseEntity<UserReadModel> updateUser(@RequestBody UserWriteModel user) {
         UserReadModel result = userModify.changeUserEmail(user);
         /*UserReadModel result2 = userModify.changeUserPassword(user);*/
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 
-    @DeleteMapping("/users")
+    @DeleteMapping
     public ResponseEntity deleteUser(@RequestParam long id) {
         userModify.deleteUser(id);
         return ResponseEntity.noContent().build();
@@ -64,12 +65,12 @@ class UserController {
     //Role
 
     @PostMapping("/roles")
-    public ResponseEntity<RoleReadModel> addRole(@RequestBody RoleWriteModel role) {
+    public ResponseEntity<RoleReadModel> createRole(@RequestBody RoleWriteModel role) {
         RoleReadModel result = roleAdd.addRole(role);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 
-    @DeleteMapping("/users")
+    @DeleteMapping("/roles")
     public ResponseEntity deleteRole(@RequestParam long id) {
         roleModify.deleteRole(id);
         return ResponseEntity.noContent().build();

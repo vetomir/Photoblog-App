@@ -15,20 +15,13 @@ import java.util.stream.Collectors;
 @Service
 public
 class PostAdd {
-    private static final int PAGE_SIZE = 25;
     private PostRepository postRepository;
-    private TagRepository tagRepository;
-    private CommentRepository commentRepository;
     private TagAdd tagAdd;
 
-    public PostAdd(final PostRepository postRepository, final TagRepository tagRepository, final CommentRepository commentRepository, final TagAdd tagAdd) {
+    public PostAdd(final PostRepository postRepository, final TagAdd tagAdd) {
         this.postRepository = postRepository;
-        this.tagRepository = tagRepository;
-        this.commentRepository = commentRepository;
         this.tagAdd = tagAdd;
     }
-
-
 
     public PostReadModel addPost(Post post) {
         /*post.setUser(userRepository.findById(authorId).get());*/
@@ -42,6 +35,7 @@ class PostAdd {
 
         return PostMapper.mapPostEntityToPostReadModel(postRepository.save(post));
     }
+
     public PostReadModel addPostFromDao(PostWriteModel postWriteModel) {
         Post postToSave = PostMapper.mapPostWriteModelsToEntity(postWriteModel);
         return addPost(postToSave);

@@ -22,7 +22,6 @@ import java.util.Set;
 @Entity
 @Setter
 @Getter
-@NoArgsConstructor
 @Table(name = "users")
 public class User extends Audit implements UserDetails {
 
@@ -30,8 +29,7 @@ public class User extends Audit implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
-    private String name;
+    private String name = "";
     @NotBlank
     @Email
     private String username;
@@ -59,14 +57,18 @@ public class User extends Audit implements UserDetails {
                     name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
-    Set<Role> roles;
+    Set<Role> roles = new HashSet<>();
 
     public User(String name, String username, String password) {
         this.name = name;
         this.username = username;
         this.password = password;
         setDefaultPhoto();
-        roles = new HashSet<>();
+        this.isEnabled = true;
+    }
+
+    public User() {
+        setDefaultPhoto();
         this.isEnabled = true;
     }
 
@@ -90,7 +92,7 @@ public class User extends Audit implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-        roles.forEach(x -> authorities.add(new SimpleGrantedAuthority("ROLE_" + x.getName().toUpperCase())));
+        roles.forEach(x -> authorities.add(new SimpleGrantedAuthority(x.getName().toUpperCase())));
         return authorities;
     }
 

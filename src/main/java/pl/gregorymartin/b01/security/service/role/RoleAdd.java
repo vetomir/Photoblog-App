@@ -16,6 +16,8 @@ class RoleAdd {
     }
 
     public RoleReadModel addRole(RoleWriteModel role) {
-        return RoleMapper.mapRoleEntityToRoleReadModel(roleRepository.save(RoleMapper.mapRoleWriteModelToRoleEntity(role)));
+        return RoleMapper.mapRoleEntityToRoleReadModel(
+                roleRepository.save(
+                        RoleMapper.mapRoleWriteModelToRoleEntity(role)));
     }
 }

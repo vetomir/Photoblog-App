@@ -11,6 +11,7 @@ import java.util.Optional;
 public interface UserRepository {
     List<User> findAll();
     Page<User> findAll(Pageable pageable);
+    Optional<User> findByUsername(String username);
 
     User findAllByUsername(String username);
     User findByName(String name);

@@ -1,10 +1,12 @@
 package pl.gregorymartin.b01.core.repository.sql;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import pl.gregorymartin.b01.core.mapping.model.PostInListReadModel;
+import pl.gregorymartin.b01.core.model.Comment;
 import pl.gregorymartin.b01.core.model.Post;
 import pl.gregorymartin.b01.core.repository.PostRepository;
 
@@ -33,4 +35,7 @@ interface SqlPostRepository extends PostRepository, JpaRepository<Post, Long> {
 
     @Override
     Optional<Post> findById(long id);
+
+    @Query("Select p.comments From Post p where p.id = ?1")
+    Page<Comment> findAllCommentsByPostId(long id, Pageable pageable);
 }

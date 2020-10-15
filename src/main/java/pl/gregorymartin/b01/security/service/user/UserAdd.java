@@ -15,8 +15,7 @@ import java.util.Optional;
 @Service
 public
 class UserAdd {
-    private static String DEFAULT_ROLE = "USER_ROLE";
-    private static int PAGE_SIZE = 25;
+    private static String DEFAULT_ROLE = "ROLE_USER";
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private PasswordEncoder passwordEncoder;
@@ -28,13 +27,17 @@ class UserAdd {
     }
 
     public UserReadModel registerUser(UserWriteModel userWriteModel){
-        User result = UserMapper.mapUserWriteModelToUserEntity(userWriteModel);
-        Optional<Role> roleByName = roleRepository.findByName(DEFAULT_ROLE);
-        result.newRole(roleByName.get());
-        result.setPassword(passwordEncoder.encode(result.getPassword()));
-        UserReadModel userReadModel = UserMapper.mapUserEntityToUserReadModel(userRepository.save(result));
+        Optional<User> byUsername = userRepository.findByUsername(userWriteModel.getEmail());
+        if(byUsername.isEmpty()){
+            User result = UserMapper.mapUserWriteModelToUserEntity(userWriteModel);
+            Optional<Role> roleByName = roleRepository.findByName(DEFAULT_ROLE);
+            System.out.println("??????????????????????????????????????????????????" + roleByName.get().getName());
+            result.newRole(roleByName.get());
+            result.setPassword(passwordEncoder.encode(userWriteModel.getPassword()));
 
-        return userReadModel;
+            return UserMapper.mapUserEntityToUserReadModel(userRepository.save(result));
+        }
+        throw new IllegalArgumentException("User with these username(email) is already exists");
     }
 
 }

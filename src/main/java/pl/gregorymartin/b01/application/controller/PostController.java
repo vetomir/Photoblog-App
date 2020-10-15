@@ -15,7 +15,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/posts")
 class PostController {
     private PostGet postGet;
     private PostAdd postAdd;
@@ -27,8 +27,8 @@ class PostController {
         this.postModify = postModify;
     }
 
-    @GetMapping("/posts/all")
-    public ResponseEntity<List<PostInListReadModel>> getPosts(@RequestParam(required = false) Integer page, Sort.Direction sort, String sortBy
+    @GetMapping("/list")
+    public ResponseEntity<List<PostInListReadModel>> readPosts(@RequestParam(required = false) Integer page, Sort.Direction sort, String sortBy
                                                   /*@AuthenticationPrincipal UsernamePasswordAuthenticationToken user*/) {
         int pageNumber = page != null && page >= 0 ? page : 0;
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
@@ -37,24 +37,24 @@ class PostController {
         return ResponseEntity.ok(postGet.getPosts(pageNumber, sortDirection, sortByVariable));
     }
 
-    @GetMapping("/posts")
-    public ResponseEntity<PostReadModel> getSinglePost(@RequestParam long id) {
+    @GetMapping
+    public ResponseEntity<PostReadModel> readSinglePost(@RequestParam int id) {
         return ResponseEntity.ok(postGet.getPostDto(id));
     }
 
-    @PostMapping("/posts")
-    public ResponseEntity<PostReadModel> addPost(@RequestBody PostWriteModel post/*, @RequestParam(name = "user-id") long userId*/) {
+    @PostMapping
+    public ResponseEntity<PostReadModel> createPost(@RequestBody PostWriteModel post/*, @RequestParam(name = "user-id") long userId*/) {
         PostReadModel result = postAdd.addPostFromDao(post);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 
-    @PatchMapping("/posts")
+    @PatchMapping
     public ResponseEntity<Post> updatePost(@RequestParam long id, @RequestBody PostWriteModel post/*, @RequestParam(name = "user-id") long userId*/) {
         Post result = postModify.editPostFromDao(id, post);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }
 
-    @DeleteMapping("/posts")
+    @DeleteMapping
     public ResponseEntity deletePost(@RequestParam long id) {
         postModify.deletePost(id);
         return ResponseEntity.noContent().build();

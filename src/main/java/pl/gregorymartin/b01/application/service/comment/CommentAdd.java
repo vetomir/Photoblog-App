@@ -44,6 +44,7 @@ class CommentAdd {
             return CommentMapper.mapEntityToCommentReadModel(commentRepository.save(obj));
         }
         else
-            return null;
+            //todo
+            throw new IllegalArgumentException("User/Post is not present");
     }
 }

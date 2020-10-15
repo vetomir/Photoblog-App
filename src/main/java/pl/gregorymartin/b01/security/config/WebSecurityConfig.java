@@ -2,6 +2,7 @@ package pl.gregorymartin.b01.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -31,7 +32,18 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/users").authenticated()
+                .antMatchers(HttpMethod.POST, "/users").authenticated()
+                .antMatchers(HttpMethod.POST, "/roles").authenticated()
+                .antMatchers(HttpMethod.POST, "/posts").authenticated()
+                .antMatchers(HttpMethod.POST, "/comments").authenticated()
+                .antMatchers(HttpMethod.PATCH, "/users").authenticated()
+                .antMatchers(HttpMethod.PATCH, "/users").authenticated()
+                .antMatchers(HttpMethod.PATCH, "/roles").authenticated()
+                .antMatchers(HttpMethod.PATCH, "/roles").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/posts").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/posts").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/comments").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/comments").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/")

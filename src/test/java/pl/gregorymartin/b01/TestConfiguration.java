@@ -19,6 +19,7 @@ import javax.sql.DataSource;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
+/*
 
 @Configuration
 public class TestConfiguration {
@@ -64,7 +65,8 @@ public class TestConfiguration {
             }
         };
     }
-    @Bean
+    */
+/*@Bean
     @Primary
     @Profile("integration")
     public PostRepository testPostRepository() {
@@ -116,7 +118,8 @@ public class TestConfiguration {
                 return posts.get(key);
             }
         };
-    }
+    }*//*
+
     @Bean
     @Primary
     @Profile("integration")
@@ -176,3 +179,4 @@ public class TestConfiguration {
         };
     }
 }
+*/

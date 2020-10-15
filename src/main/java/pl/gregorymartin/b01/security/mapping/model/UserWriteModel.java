@@ -1,10 +1,12 @@
 package pl.gregorymartin.b01.security.mapping.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public
 class UserWriteModel {
     private long id;

@@ -1,6 +1,7 @@
 package pl.gregorymartin.b01.core.mapping.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.URL;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public
 class PostWriteModel {
     @NotBlank(message = "URL Cannot be Blank")

@@ -14,8 +14,6 @@ import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public class UserMapper {
-
-
     //create
     public static List<User> mapUserWriteModelToUserEntity(List<UserWriteModel> userDaos) {
         return userDaos.stream()

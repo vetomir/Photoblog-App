@@ -10,7 +10,10 @@ public class CommentWriteModel {
     private long userId;
     private long postId;
 
-    public CommentWriteModel(final String content) {
+
+    public CommentWriteModel(final String content, final long userId, final long postId) {
         this.content = content;
+        this.userId = userId;
+        this.postId = postId;
     }
 }
