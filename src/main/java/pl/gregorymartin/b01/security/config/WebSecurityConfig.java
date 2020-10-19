@@ -32,7 +32,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(final HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/users").authenticated()
+/*                .antMatchers(HttpMethod.POST, "/users").authenticated()
                 .antMatchers(HttpMethod.POST, "/roles").authenticated()
                 .antMatchers(HttpMethod.POST, "/posts").authenticated()
                 .antMatchers(HttpMethod.POST, "/comments").authenticated()
@@ -43,7 +43,7 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/posts").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/posts").authenticated()
                 .antMatchers(HttpMethod.DELETE, "/comments").authenticated()
-                .antMatchers(HttpMethod.DELETE, "/comments").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/comments").authenticated()*/
                 .anyRequest().permitAll()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/")

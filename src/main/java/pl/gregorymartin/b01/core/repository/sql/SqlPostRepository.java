@@ -31,6 +31,9 @@ interface SqlPostRepository extends PostRepository, JpaRepository<Post, Long> {
     List<Post> findAll();
 
     @Override
+    Page<Post> findAll(Pageable pageable);
+
+    @Override
     Post save(Post post);
 
     @Override

@@ -21,7 +21,7 @@ interface SqlUserRepository extends UserRepository, JpaRepository<User, Long> {
 
 
     User findAllByUsername(String username);
-    User findByName(String name);
+    Optional<User> findByName(String name);
     Optional<User> findById(long id);
     @Query("Select p.posts From User p where p.username = ?1")
     Optional<User> findByUsername(String username);

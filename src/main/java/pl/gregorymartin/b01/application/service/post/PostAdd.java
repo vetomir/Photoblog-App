@@ -6,10 +6,11 @@ import pl.gregorymartin.b01.core.mapping.PostMapper;
 import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
 import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
 import pl.gregorymartin.b01.core.model.Post;
-import pl.gregorymartin.b01.core.repository.CommentRepository;
 import pl.gregorymartin.b01.core.repository.PostRepository;
-import pl.gregorymartin.b01.core.repository.TagRepository;
+import pl.gregorymartin.b01.security.model.User;
+import pl.gregorymartin.b01.security.repository.UserRepository;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,10 +18,12 @@ public
 class PostAdd {
     private PostRepository postRepository;
     private TagAdd tagAdd;
+    private UserRepository userRepository;
 
-    public PostAdd(final PostRepository postRepository, final TagAdd tagAdd) {
+    public PostAdd(final PostRepository postRepository, final TagAdd tagAdd, final UserRepository userRepository) {
         this.postRepository = postRepository;
         this.tagAdd = tagAdd;
+        this.userRepository = userRepository;
     }
 
     public PostReadModel addPost(Post post) {
@@ -37,7 +40,12 @@ class PostAdd {
     }
 
     public PostReadModel addPostFromDao(PostWriteModel postWriteModel) {
+        Optional<User> user = userRepository.findById(postWriteModel.getUserId());
+        if(user.isEmpty()){
+           throw new IllegalArgumentException("User is not present.");
+        }
         Post postToSave = PostMapper.mapPostWriteModelsToEntity(postWriteModel);
+        postToSave.setUser(user.get());
         return addPost(postToSave);
     }
 }

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public
 class PostGet {
-    private static final int PAGE_SIZE = 25;
+    private static final int PAGE_SIZE = 20;
     private PostRepository postRepository;
 
     public PostGet(final PostRepository postRepository) {
@@ -32,12 +32,12 @@ class PostGet {
         else throw new IllegalArgumentException("Post is not exists");
     }
 
-    public List<PostInListReadModel> getPosts(int page, Sort.Direction sort, String sortBy) {
-        return postRepository.findAllAndMapToDto(
+    public List<PostReadModel> getPosts(int page, Sort.Direction sort, String sortBy) {
+        List<Post> list = postRepository.findAll(
                 PageRequest.of(page, PAGE_SIZE,
                         Sort.by(sort, sortBy)
-                )
-        );
+                )).getContent();
+        return PostMapper.mapPostEntityToPostReadModel(list);
     }
 
     public List<PostInListReadModel> searchPosts(String query, int page, int PAGE_SIZE) {

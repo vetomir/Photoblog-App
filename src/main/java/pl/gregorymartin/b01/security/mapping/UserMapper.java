@@ -24,8 +24,9 @@ public class UserMapper {
     public static User mapUserWriteModelToUserEntity(UserWriteModel userDao) {
         if(userDao.getPassword2().equals(userDao.getPassword())){
             User user = new User();
+            user.setName(userDao.getName());
             user.setUsername(userDao.getEmail());
-            user.setPassword(user.getPassword());
+            user.setPassword(userDao.getPassword());
 
             return user;
         }

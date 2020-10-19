@@ -28,10 +28,10 @@ class UserAdd {
 
     public UserReadModel registerUser(UserWriteModel userWriteModel){
         Optional<User> byUsername = userRepository.findByUsername(userWriteModel.getEmail());
-        if(byUsername.isEmpty()){
+        Optional<User> byName = userRepository.findByName(userWriteModel.getName());
+        if(byUsername.isEmpty() && byName.isEmpty()){
             User result = UserMapper.mapUserWriteModelToUserEntity(userWriteModel);
             Optional<Role> roleByName = roleRepository.findByName(DEFAULT_ROLE);
-            System.out.println("??????????????????????????????????????????????????" + roleByName.get().getName());
             result.newRole(roleByName.get());
             result.setPassword(passwordEncoder.encode(userWriteModel.getPassword()));
 

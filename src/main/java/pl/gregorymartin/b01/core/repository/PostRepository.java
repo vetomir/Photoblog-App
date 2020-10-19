@@ -13,6 +13,7 @@ public interface PostRepository {
     List<PostInListReadModel> findAllAndMapToDto(Pageable page);
     Post save(Post post);
     List<Post> findAll();
+    Page<Post> findAll(Pageable pageable);
     Optional<Post> findById(long id);
     boolean deleteById(long id);
     Page<Comment> findAllCommentsByPostId(long id, Pageable pageable);

@@ -40,9 +40,7 @@ class TestController {
         this.userAdd = userAdd;
         this.roleAdd = roleAdd;
 
-
-        /*addContent(33);*/
-
+        /*addContent(300);*/
     }
 
     public String helloLipsum(String a, String b, String c){
@@ -53,13 +51,13 @@ class TestController {
     void addContent(int number) {
         roleAdd.addRole(new RoleWriteModel("ROLE_USER"));
         //
-        userAdd.registerUser(new UserWriteModel("test1@test.pl", "Test123", "Test123"));
-        userAdd.registerUser(new UserWriteModel("test2@test.pl", "Test123", "Test123"));
-        userAdd.registerUser(new UserWriteModel("test3@test.pl", "Test123", "Test123"));
-        userAdd.registerUser(new UserWriteModel("test4@test.pl", "Test123", "Test123"));
-        userAdd.registerUser(new UserWriteModel("test5@test.pl", "Test123", "Test123"));
-        userAdd.registerUser(new UserWriteModel("test6@test.pl", "Test123", "Test123"));
-        userAdd.registerUser(new UserWriteModel("test7@test.pl", "Test123", "Test123"));
+        userAdd.registerUser(new UserWriteModel("szczepanus","test1@test.pl", "Test123", "Test123"));
+        userAdd.registerUser(new UserWriteModel("mirex","test2@test.pl", "Test123", "Test123"));
+        userAdd.registerUser(new UserWriteModel("juzkus","test3@test.pl", "Test123", "Test123"));
+        userAdd.registerUser(new UserWriteModel("władomit","test4@test.pl", "Test123", "Test123"));
+        userAdd.registerUser(new UserWriteModel("alfons","test5@test.pl", "Test123", "Test123"));
+        userAdd.registerUser(new UserWriteModel("elmo","test6@test.pl", "Test123", "Test123"));
+        userAdd.registerUser(new UserWriteModel("tadeusix","test7@test.pl", "Test123", "Test123"));
         //
         List<String> photos = new ArrayList<>();
         photos.add("https://images.unsplash.com/photo-1504829857797-ddff29c27927?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=10");
@@ -155,7 +153,7 @@ class TestController {
 
             addPost.addPostFromDao(post);
         }
-
+        //
         commentAdd.addComment(new CommentWriteModel(lipsum, 1L,1L));
         commentAdd.addComment(new CommentWriteModel(lipsum, 2L,2L));
         commentAdd.addComment(new CommentWriteModel(lipsum, 3L,2L));
@@ -165,7 +163,7 @@ class TestController {
     }
 
     @GetMapping("/all")
-    List<PostInListReadModel> elo(){
+    List<PostReadModel> elo(){
         return postGet.getPosts(0, Sort.Direction.ASC, "id");
     }
 

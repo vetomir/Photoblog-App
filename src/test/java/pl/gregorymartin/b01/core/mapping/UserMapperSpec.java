@@ -29,7 +29,7 @@ class UserMapperSpec {
     @Test
     void should_mapUserWriteModelToUserEntity_andReturnsGivenContent() {
         //given
-        UserWriteModel userWriteModel = new UserWriteModel("abc@test.com", "UgaBuga123","UgaBuga123");
+        UserWriteModel userWriteModel = new UserWriteModel("Test","abc@test.com", "UgaBuga123","UgaBuga123");
         //when
         User user = UserMapper.mapUserWriteModelToUserEntity(userWriteModel);
         //then
@@ -39,7 +39,7 @@ class UserMapperSpec {
     @Test
     void mapUserWriteModelToUserEntity_andThrowIllegalArgumentException() {
         //given
-        UserWriteModel userWriteModel = new UserWriteModel("abc@test.com", "Buga123Uga","Ugabuga123");
+        UserWriteModel userWriteModel = new UserWriteModel("Test","abc@test.com", "Buga123Uga","Ugabuga123");
         //when
         Throwable exception = catchThrowable(() -> UserMapper.mapUserWriteModelToUserEntity(userWriteModel));
         //then
@@ -52,8 +52,8 @@ class UserMapperSpec {
     void should_mapPostWriteModelsToEntity_forList_andReturnsGivenContents() {
         //given
         List<UserWriteModel> list = new ArrayList<>();
-        list.add(new UserWriteModel("abc@test.com", "UgaBuga123","UgaBuga123"));
-        list.add(new UserWriteModel("abc1@test.com", "UgaBuga","UgaBuga"));
+        list.add(new UserWriteModel("Test1","abc@test.com", "UgaBuga123","UgaBuga123"));
+        list.add(new UserWriteModel("Test2","abc1@test.com", "UgaBuga","UgaBuga"));
         //when
         List<User> userList = UserMapper.mapUserWriteModelToUserEntity(list);
         //then

@@ -70,8 +70,8 @@ public class PostMapper {
                         .collect(Collectors.toList()))
                 .createdOn(post.formatCreatedOn())
                 .commentReadModels(CommentMapper.mapEntityToCommentReadModel(post.getComments()))
-/*                .userName(post.getUser().getName())
-                .userAvatar(post.getUser().getAvatar())*/
+                .userName(post.getUser().getName())
+                .userAvatar(post.getUser().getAvatar())
                 .numberOfComments(post.getNumberOfComments())
                 .numberOfLikes(post.getNumberOfLikes())
                 .build();

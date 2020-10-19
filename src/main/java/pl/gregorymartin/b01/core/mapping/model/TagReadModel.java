@@ -1,5 +1,8 @@
 package pl.gregorymartin.b01.core.mapping.model;
 
+import lombok.Getter;
+
+@Getter
 public class TagReadModel {
     private String name;
     //todo

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+
+    <link href="../static/main/style.css" th:href="@{/style.css}" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800;900&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <title>Home Page</title>
+</head>
+<body>
+    <div class="canvas">
+        <div class="menu">
+            <!--<div th:replace="fragments/menu :: navbar"></div>-->
+            <nav th:fragment="navbar" class="uk-navbar-container" uk-navbar>
+                <div class="uk-navbar-left">
+                    <ul class="uk-navbar-nav">
+                        <li>
+                            <a class="nav-logo" href="#">PHOTOBLOG</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="uk-navbar-center">
+                    <ul class="uk-navbar-nav">
+                        <li class="uk-active"><a href="#">Home</a></li>
+                        <li><a href="#">Item</a></li>
+                        <li><a href="#">Item</a></li>
+                        <li><a href="#">Item</a></li>
+                        <li><a href="#">Item</a></li>
+                    </ul>
+                </div>
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav">
+                        <button href="#add-post" type="button" uk-toggle  class="new-post-button">ADD NEW POST</button>
+                        <li href="#login" type="button" uk-toggle class="uk-active"><svg th:replace="fragments/svg :: key"></svg></li>
+                        <li href="#panel" type="button" uk-toggle  class="uk-active"><svg th:replace="fragments/svg :: person"></svg></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="post-single-content">
+            <img class="post-single-photo-url" th:src="${post.getPhotoUrl()}" alt="Example image">
+            <div>
+                <p th:text="${post.getDescription()}">description</p>
+                <div class="post-single-">
+                    <div class="post-modal-relations">
+                        <div class="post-modal-like">
+                            <a th:text="${post.getNumberOfLikes()}" uk-icon="heart"></a>
+                            <!--  <svg th:replace="fragments/svg :: like"></svg>-->
+                        </div>
+                        <div class="post-modal-comment">
+                            <a th:text="${post.getNumberOfComments()}" uk-icon="comment"></a>
+                            <!--<svg th:replace="fragments/svg :: comment"></svg>-->
+                        </div>
+                        <div class="post-modal-add-comment"><a>ADD COMMENT</a></div>
+                    </div>
+                    <div class="post-single-author">
+                        <a><img class="post-single-author-photo-url" th:src="${post.getUserAvatar()}" alt="Example image"></a>
+                        <div>
+                            <a th:text="|@${post.getUserName()}|">description</a>
+                            <p th:text="${post.getCreatedOn()}">description</p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div th:each="comment : ${post.getCommentReadModels()}">
+                        <img class="post-single-photo-url" th:src="${comment.getUserAvatarUrl()}" alt="Example image">
+                        <p th:text="|@${comment.getUserName()}|"></p>
+                        <p th:text="${comment.getCreatedOn()}"></p>
+                        <p th:text="${comment.getContent()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-box">
+            <!--<div th:replace="fragments/footer :: footer"></div>-->
+            <p>©2020 Grzegorz Szczerba</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -29,7 +29,7 @@ public class User extends Audit implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name = "";
+    private String name;
     @NotBlank
     @Email
     private String username;

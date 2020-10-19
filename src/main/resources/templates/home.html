@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+
+    <link href="../static/main/style.css" th:href="@{/style.css}" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800;900&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <title>Home Page</title>
+</head>
+<body>
+    <div class="canvas">
+        <div class="menu">
+            <!--<div th:replace="fragments/menu :: navbar"></div>-->
+            <nav th:fragment="navbar" class="uk-navbar-container" uk-navbar>
+                <div class="uk-navbar-left">
+                    <ul class="uk-navbar-nav">
+                        <li>
+                            <a class="nav-logo" href="#">PHOTOBLOG</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="uk-navbar-center">
+                    <ul class="uk-navbar-nav">
+                        <li class="uk-active"><a href="#">Home</a></li>
+                        <li><a href="#">Item</a></li>
+                        <li><a href="#">Item</a></li>
+                        <li><a href="#">Item</a></li>
+                        <li><a href="#">Item</a></li>
+                    </ul>
+                </div>
+                <div class="uk-navbar-right">
+                    <ul class="uk-navbar-nav">
+                        <button href="#add-post" type="button" uk-toggle  class="new-post-button">ADD NEW POST</button>
+                        <li href="#login" type="button" uk-toggle class="uk-active"><svg th:replace="fragments/svg :: key"></svg></li>
+                        <li href="#panel" type="button" uk-toggle  class="uk-active"><svg th:replace="fragments/svg :: person"></svg></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="header-box">
+            <!--<div th:replace="fragments/header :: header"></div>-->
+            <div style="background: #dddddd">
+                <iframe src="https://player.vimeo.com/video/251646742?title=0&amp;loop=1&amp;byline=0&amp;portrait=0&amp;api=1&amp;player_id=1&amp;api=1&amp;player_id=1" loop="" muted="" playsinline="" uk-video="autoplay: inview; automute: true"></iframe>
+                <div>
+                    <div class="header-title">
+                        <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
+                    </div>
+                    <div class="header-search">
+                        <div class="header-search-icon">
+                            <svg class="search-svg" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" data-svg="search-large"><circle fill="none" stroke="#fff" stroke-width="1.8" cx="17.5" cy="17.5" r="16.5"></circle><line fill="none" stroke="#fff" stroke-width="1.8" x1="38" y1="39" x2="29" y2="30"></line></svg>
+                        </div>
+                        <input class="header-search-input" placeholder="Search">
+                    </div>
+                </div>
+            </div>
+            <div class="header-box-2">
+                <div>
+                    <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
+                    <button>BUTTON</button>
+                </div>
+            </div>
+
+
+           <!-- <div th:replace="fragments/header :: author"></div>-->
+        </div>
+        <div class="category-box">
+            <div th:each="tag : ${popularTags}"><a th:text="${tag.name.substring(1)}">CATEGORY</a></div>
+            <!--<div th:replace="fragments/category :: category-item"></div>-->
+            <div><a href="#all-tags" type="button" uk-toggle>...</a></div>
+        </div>
+        <div class="content-box">
+            <div class="content-filer">
+                <ul>
+                    <li><a class="active">🔥Hot</a></li>
+                    <li><a>OPTION</a></li>
+                </ul>
+            </div>
+            <div class="content-box-container">
+                <div class="content-post" th:each="post : ${allPosts}" >
+                    <div class="reactions">
+                        <div class="like">
+                            <a th:text="${post.getNumberOfLikes()}"  uk-icon="heart"></a>
+                        </div>
+                        <div class="comment">
+                            <a th:text="${post.getNumberOfComments()}" uk-icon="comment"></a>
+                        </div>
+                    </div>
+                    <div class="user" th:text="|@${post.userName}|">@user</div>
+                    <a th:href="|#post-modal${post.id}|" type="button" uk-toggle>
+                        <img  class="photo-url uk-animation-reverse uk-transform-origin-top-right" th:src="${post.getPhotoUrl()}" alt="Example image" uk-scrollspy="cls: uk-animation-kenburns; repeat: true">
+                    </a>
+                    <!--Modal-->
+                    <div th:id="|post-modal${post.id}|" class="post-modal" uk-modal>
+                        <div class="post-modal-homepage uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                            <button class="uk-modal-close-outside" type="button" uk-close></button>
+                            <div class="post-modal-image">
+                                <img th:src="${post.getPhotoUrl()}">
+                            </div>
+                            <div class="post-modal-description uk-animation-slide-bottom-small">
+                                <p th:text="${post.getDescription()}"></p>
+                                <div >
+                                    <div class="post-modal-relations">
+                                        <div class="post-modal-like">
+                                            <a th:text="${post.getNumberOfLikes()}" uk-icon="heart"></a>
+                                          <!--  <svg th:replace="fragments/svg :: like"></svg>-->
+                                        </div>
+                                        <div class="post-modal-comment">
+                                            <a th:text="${post.getNumberOfComments()}" uk-icon="comment"></a>
+                                            <!--<svg th:replace="fragments/svg :: comment"></svg>-->
+                                        </div>
+                                        <div class="post-modal-add-comment"><a>ADD COMMENT</a></div>
+                                    </div>
+                                    <div class="post-modal-readmore">
+                                        <div>READ MORE</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--<div th:replace="fragments/list :: filter-list"></div>-->
+            <!--<div th:replace="fragments/post :: post-item"></div>-->
+        </div>
+        <div class="footer-box">
+            <!--<div th:replace="fragments/footer :: footer"></div>-->
+            <p>©2020 Grzegorz Szczerba</p>
+        </div>
+        <div class="modals">
+
+            <!--<div th:replace="fragments/login :: login-modal"></div>-->
+            <div th:id="login" uk-modal>
+                <div class="post-modal-login uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                    <button class="uk-modal-close-outside" type="button" uk-close></button>
+                    <div class=" uk-animation-slide-bottom-small">
+                        <form>
+                            <label>Login</label>
+                            <input type="text" placeholder="Login" name="fname"><br><br>
+                            <label>Password</label>
+                            <input type="password" placeholder="Password" name="lname"><br><br>
+                            <button type="submit">SUBMIT</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--<div th:replace="fragments/add-post :: add-post-modal"></div>-->
+            <div th:id="add-post" uk-modal>
+                <div class="post-modal-add-post uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                    <button class="uk-modal-close-outside" type="button" uk-close></button>
+                    <div class=" uk-animation-slide-bottom-small">
+                        <form>
+                            <div class="img-preview">PREVIEW</div>
+                            <label>Url</label>
+                            <textarea type="text" placeholder="write url..."></textarea>
+                            <label>Description</label>
+                            <textarea type="text" rows="5" placeholder="write description..." name="lname"></textarea>
+                            <button type="submit">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div th:id="all-tags" uk-modal>
+                <div class="post-modal-all-tags uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+                    <button class="uk-modal-close-outside" type="button" uk-close></button>
+                    <div class="uk-animation-slide-bottom-small">
+                        <h1>All tags</h1>
+                        <div class="all-tags-container">
+                            <a th:each="tag : ${allTags}" th:text="${tag.name.substring(1)}"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

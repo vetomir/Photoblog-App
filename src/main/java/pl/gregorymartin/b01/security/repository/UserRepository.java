@@ -14,7 +14,7 @@ public interface UserRepository {
     Optional<User> findByUsername(String username);
 
     User findAllByUsername(String username);
-    User findByName(String name);
+    Optional<User> findByName(String name);
     Optional<User> findById(long id);
     User save(User user);
 

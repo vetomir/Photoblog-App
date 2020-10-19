@@ -28,7 +28,7 @@ class PostController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<PostInListReadModel>> readPosts(@RequestParam(required = false) Integer page, Sort.Direction sort, String sortBy
+    public ResponseEntity<List<PostReadModel>> readPosts(@RequestParam(required = false) Integer page, Sort.Direction sort, String sortBy
                                                   /*@AuthenticationPrincipal UsernamePasswordAuthenticationToken user*/) {
         int pageNumber = page != null && page >= 0 ? page : 0;
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;

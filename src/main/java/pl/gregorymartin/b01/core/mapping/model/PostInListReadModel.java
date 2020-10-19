@@ -18,7 +18,7 @@ public class PostInListReadModel {
     private List<String> tags;
     private int numberOfComments;
     private int numberOfLikes;
-
+    private String nameOfUser;
     //liked by present user
     private boolean presentUser;
 
