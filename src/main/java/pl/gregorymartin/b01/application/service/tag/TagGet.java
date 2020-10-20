@@ -18,11 +18,14 @@ class TagGet {
         this.tagRepository = tagRepository;
     }
     public List<TagReadModel> getTags(int page, Sort.Direction sort, String sortBy) {
-        return tagRepository.findAllAndMapToDto(
+        return tagRepository.findAllPageAndMapToDto(
                 PageRequest.of(page, PAGE_SIZE,
                         Sort.by(sort, sortBy)
                 )
         );
+    }
+    public List<TagReadModel> getAllTags() {
+        return tagRepository.findAllAndMapToDto();
     }
 }
 

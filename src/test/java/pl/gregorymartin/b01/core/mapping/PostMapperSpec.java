@@ -2,25 +2,15 @@ package pl.gregorymartin.b01.core.mapping;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import pl.gregorymartin.b01.core.mapping.model.CommentReadModel;
-import pl.gregorymartin.b01.core.mapping.model.CommentWriteModel;
 import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
 import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
-import pl.gregorymartin.b01.core.model.Comment;
 import pl.gregorymartin.b01.core.model.Post;
 import pl.gregorymartin.b01.core.model.Tag;
-import pl.gregorymartin.b01.core.repository.CommentRepository;
-import pl.gregorymartin.b01.core.repository.PostRepository;
 import pl.gregorymartin.b01.security.model.User;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collector;
-
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 
 class PostMapperSpec {
 

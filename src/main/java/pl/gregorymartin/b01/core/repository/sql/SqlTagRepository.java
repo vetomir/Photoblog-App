@@ -14,6 +14,10 @@ import java.util.List;
 public interface SqlTagRepository extends TagRepository, JpaRepository<Tag, Long> {
 
     @Query("SELECT new pl.gregorymartin.b01.core.mapping.model.TagReadModel" +
-            "(t.title) FROM Tag t")
-    List<TagReadModel> findAllAndMapToDto(Pageable page);
+            "(t.title, t.posts.size) FROM Tag t")
+    List<TagReadModel> findAllPageAndMapToDto(Pageable page);
+
+    @Query("SELECT new pl.gregorymartin.b01.core.mapping.model.TagReadModel" +
+            "(t.title, t.posts.size) FROM Tag t")
+    List<TagReadModel> findAllAndMapToDto();
 }

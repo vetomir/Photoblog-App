@@ -24,12 +24,12 @@ public class Comment extends Audit {
     private String content;
 
     @JsonBackReference
-    @ManyToOne//(cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", updatable = false)
     private User user;
 
     @JsonBackReference
-    @ManyToOne//(cascade = CascadeType.REMOVE)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "postId", updatable = false)
     private Post post;
 

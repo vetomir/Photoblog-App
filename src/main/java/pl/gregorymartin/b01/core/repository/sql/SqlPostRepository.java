@@ -28,9 +28,11 @@ interface SqlPostRepository extends PostRepository, JpaRepository<Post, Long> {
     List<PostInListReadModel> findAllAndMapToDto(Pageable page);
 
     @Override
+    @Query("Select p From Post p")
     List<Post> findAll();
 
     @Override
+    @Query("Select p From Post p")
     Page<Post> findAll(Pageable pageable);
 
     @Override
@@ -38,6 +40,9 @@ interface SqlPostRepository extends PostRepository, JpaRepository<Post, Long> {
 
     @Override
     Optional<Post> findById(long id);
+
+    @Query("Select p From Post p where p.description like %?1%")
+    Page<Post> findAllByContainedQuery(String query, Pageable pageable);
 
     @Query("Select p.comments From Post p where p.id = ?1")
     Page<Comment> findAllCommentsByPostId(long id, Pageable pageable);

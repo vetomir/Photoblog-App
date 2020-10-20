@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface TagRepository {
-    List<TagReadModel> findAllAndMapToDto(Pageable page);
+    List<TagReadModel> findAllPageAndMapToDto(Pageable page);
+    List<TagReadModel> findAllAndMapToDto();
     Optional<Tag> findByTitle(String title);
     Tag save(Tag tag);
 }

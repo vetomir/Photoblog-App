@@ -5,10 +5,10 @@ import lombok.Getter;
 @Getter
 public class TagReadModel {
     private String name;
-    //todo
     private int numberOfPosts;
 
-    public TagReadModel(final String name) {
+    public TagReadModel(final String name, final int numberOfPosts) {
         this.name = name;
+        this.numberOfPosts = numberOfPosts;
     }
 }

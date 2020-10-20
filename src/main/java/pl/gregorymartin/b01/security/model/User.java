@@ -38,11 +38,11 @@ public class User extends Audit implements UserDetails {
     private String avatar;
     private boolean isEnabled;
 
-    @OneToMany//(cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private List<Post> posts;
 
-    @OneToMany//(cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId")
     private List<Comment> comments;
 
@@ -50,7 +50,7 @@ public class User extends Audit implements UserDetails {
             fetch = FetchType.LAZY, optional = false)
     private Rate rate;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(

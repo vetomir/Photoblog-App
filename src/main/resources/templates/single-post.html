@@ -12,73 +12,88 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800;900&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
     <title>Home Page</title>
 </head>
-<body>
-    <div class="canvas">
-        <div class="menu">
-            <!--<div th:replace="fragments/menu :: navbar"></div>-->
-            <nav th:fragment="navbar" class="uk-navbar-container" uk-navbar>
-                <div class="uk-navbar-left">
-                    <ul class="uk-navbar-nav">
-                        <li>
-                            <a class="nav-logo" href="#">PHOTOBLOG</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="uk-navbar-center">
-                    <ul class="uk-navbar-nav">
-                        <li class="uk-active"><a href="#">Home</a></li>
-                        <li><a href="#">Item</a></li>
-                        <li><a href="#">Item</a></li>
-                        <li><a href="#">Item</a></li>
-                        <li><a href="#">Item</a></li>
-                    </ul>
-                </div>
-                <div class="uk-navbar-right">
-                    <ul class="uk-navbar-nav">
-                        <button href="#add-post" type="button" uk-toggle  class="new-post-button">ADD NEW POST</button>
-                        <li href="#login" type="button" uk-toggle class="uk-active"><svg th:replace="fragments/svg :: key"></svg></li>
-                        <li href="#panel" type="button" uk-toggle  class="uk-active"><svg th:replace="fragments/svg :: person"></svg></li>
-                    </ul>
-                </div>
-            </nav>
+<body class="post-single-body" th:style="|background-image: url(${post.photoUrl})|">
+<div class="menu">
+    <!--<div th:replace="fragments/menu :: navbar"></div>-->
+    <nav th:fragment="navbar" class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+                <li>
+                    <a class="nav-logo" href="#">PHOTOBLOG</a>
+                </li>
+            </ul>
         </div>
-        <div class="post-single-content">
-            <img class="post-single-photo-url" th:src="${post.getPhotoUrl()}" alt="Example image">
-            <div>
-                <p th:text="${post.getDescription()}">description</p>
-                <div class="post-single-">
-                    <div class="post-modal-relations">
-                        <div class="post-modal-like">
-                            <a th:text="${post.getNumberOfLikes()}" uk-icon="heart"></a>
-                            <!--  <svg th:replace="fragments/svg :: like"></svg>-->
-                        </div>
-                        <div class="post-modal-comment">
-                            <a th:text="${post.getNumberOfComments()}" uk-icon="comment"></a>
-                            <!--<svg th:replace="fragments/svg :: comment"></svg>-->
-                        </div>
-                        <div class="post-modal-add-comment"><a>ADD COMMENT</a></div>
-                    </div>
+        <div class="uk-navbar-center">
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="#">Home</a></li>
+                <li><a href="#">Item</a></li>
+                <li><a href="#">Item</a></li>
+                <li><a href="#">Item</a></li>
+                <li><a href="#">Item</a></li>
+            </ul>
+        </div>
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav">
+                <button href="#add-post" type="button" uk-toggle  class="new-post-button">ADD NEW POST</button>
+                <li href="#login" type="button" uk-toggle class="uk-active"><svg th:replace="fragments/svg :: key"></svg></li>
+                <li href="#panel" type="button" uk-toggle  class="uk-active"><svg th:replace="fragments/svg :: person"></svg></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+    <div class="post-single-body-bg">
+        <div class="canvas">
+            <div class="post-single-content">
+                <img class="post-single-photo-url" th:src="${post.getPhotoUrl()}" alt="Example image">
+                <div class="post-single-relations">
                     <div class="post-single-author">
                         <a><img class="post-single-author-photo-url" th:src="${post.getUserAvatar()}" alt="Example image"></a>
                         <div>
                             <a th:text="|@${post.getUserName()}|">description</a>
-                            <p th:text="${post.getCreatedOn()}">description</p>
                         </div>
                     </div>
-                </div>
-                <div>
-                    <div th:each="comment : ${post.getCommentReadModels()}">
-                        <img class="post-single-photo-url" th:src="${comment.getUserAvatarUrl()}" alt="Example image">
-                        <p th:text="|@${comment.getUserName()}|"></p>
-                        <p th:text="${comment.getCreatedOn()}"></p>
-                        <p th:text="${comment.getContent()}"></p>
+                    <p th:text="${post.getDescription()}">description</p>
+                    <div>
+                        <div class="post-modal-relations">
+                            <div class="post-modal-like">
+                                <a th:text="${post.getNumberOfLikes()}" uk-icon="heart"></a>
+                                <!--  <svg th:replace="fragments/svg :: like"></svg>-->
+                            </div>
+                            <div class="post-modal-comment">
+                                <a th:text="${post.getNumberOfComments()}" type="button" uk-toggle="target: #comments-modal" href="#comments-modal" uk-icon="comment"></a>
+                                <!--<svg th:replace="fragments/svg :: comment"></svg>-->
+                            </div>
+                            <div class="post-modal-add-comment"><a type="button" uk-toggle="target: #comments-modal" href="#comments-modal">ADD COMMENT</a></div>
+                        </div>
+                        <p class="post-single-created-on" th:text="${post.getCreatedOn()}">description</p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="footer-box">
-            <!--<div th:replace="fragments/footer :: footer"></div>-->
-            <p>©2020 Grzegorz Szczerba</p>
+            <div id="comments-modal" uk-offcanvas="flip: true; mode: reveal; overlay: true">
+                <div class="post-single-comment-modal uk-offcanvas-bar">
+                    <div class="post-single-comment-modal-form">
+                        <textarea rows="5"></textarea>
+                        <a class="comment-submit">ADD COMMENT</a>
+                    </div>
+                    <div>
+                        <div class="post-single-comment-box" th:each="comment : ${post.getCommentReadModels()}">
+                            <div>
+                                <a><img class="comment-box-photo-url" th:src="${comment.getUserAvatarUrl()}" alt="Example image"></a>
+                                <div class="comment-box-author">
+                                    <a class="author" th:text="|@${comment.getUserName()}|"></a>
+                                    <p class="created-on" th:text="${comment.getCreatedOn()}"></p>
+                                </div>
+                            </div>
+                            <p class="comment-box-content" th:text="${comment.getContent()}"></p>
+                            <a class="comment-box-delete" href="#" uk-icon="trash"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-box">
+                <!--<div th:replace="fragments/footer :: footer"></div>-->
+                <p>©2020 Grzegorz Szczerba</p>
+            </div>
         </div>
     </div>
 </body>

@@ -2,6 +2,7 @@ package pl.gregorymartin.b01.core.mapping;
 
 
 
+import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
 import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
@@ -9,6 +10,7 @@ import pl.gregorymartin.b01.core.model.Post;
 import pl.gregorymartin.b01.core.model.Tag;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,7 +62,18 @@ public class PostMapper {
     }
 
     public static PostReadModel mapPostEntityToPostReadModel(Post post) {
-
+        return PostReadModel.builder()
+                .id(post.getId())
+                .description(post.getDescription())
+                .photoUrl(post.getPhotoUrl())
+                .createdOn(post.formatCreatedOn())
+                .userName(post.getUser().getName())
+                .userAvatar(post.getUser().getAvatar())
+                .numberOfComments(post.getNumberOfComments())
+                .numberOfLikes(post.getNumberOfLikes())
+                .build();
+    }
+    public static PostReadModel mapPostEntityToSinglePostReadModel(Post post) {
         return PostReadModel.builder()
                 .id(post.getId())
                 .description(post.getDescription())
@@ -69,7 +82,8 @@ public class PostMapper {
                         .map(Tag::getTitle)
                         .collect(Collectors.toList()))
                 .createdOn(post.formatCreatedOn())
-                .commentReadModels(CommentMapper.mapEntityToCommentReadModel(post.getComments()))
+                .commentReadModels(Lists.reverse(
+                        CommentMapper.mapEntityToCommentReadModel(post.getComments())))
                 .userName(post.getUser().getName())
                 .userAvatar(post.getUser().getAvatar())
                 .numberOfComments(post.getNumberOfComments())

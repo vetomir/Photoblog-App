@@ -31,7 +31,7 @@ public class Post extends Audit {
     private int numberOfComments;
 
     @JsonBackReference
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "posts_tags",
             joinColumns = @JoinColumn(
@@ -43,7 +43,7 @@ public class Post extends Audit {
 
 
     @JsonBackReference
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "posts_rates",
             joinColumns = @JoinColumn(
@@ -52,12 +52,12 @@ public class Post extends Audit {
                     name = "categoryId", referencedColumnName = "id"))
     private Set<Rate> rates = new HashSet<>();
 
-    @OneToMany//(cascade = CascadeType.REMOVE)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "postId",  insertable = false)
     private List<Comment> comments;
 
     @JsonBackReference
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "userId", updatable = false)
     private User user;
 

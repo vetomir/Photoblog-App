@@ -29,8 +29,8 @@ class CommentController {
     }
     @PostMapping
     public ResponseEntity<CommentReadModel> createComment(@RequestBody CommentWriteModel comment, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        comment.setUserId(user.getId());
+        /*User user = (User) authentication.getPrincipal();*/
+        /*comment.setUserId(user.getId());*/
         CommentReadModel result = commentAdd.addComment(comment);
         return ResponseEntity.created(URI.create("/" + result.getId())).body(result);
     }

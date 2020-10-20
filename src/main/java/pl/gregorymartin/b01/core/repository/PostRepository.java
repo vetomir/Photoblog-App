@@ -17,4 +17,5 @@ public interface PostRepository {
     Optional<Post> findById(long id);
     boolean deleteById(long id);
     Page<Comment> findAllCommentsByPostId(long id, Pageable pageable);
+    Page<Post> findAllByContainedQuery(String query, Pageable pageable);
 }

@@ -42,36 +42,14 @@
         </nav>
     </div>
     <div class="canvas">
-        <div class="header-box">
-            <!--<div th:replace="fragments/header :: header"></div>-->
-            <div style="background: #dddddd">
-                <iframe src="https://player.vimeo.com/video/251646742?title=0&amp;loop=1&amp;byline=0&amp;portrait=0&amp;api=1&amp;player_id=1&amp;api=1&amp;player_id=1" loop="" muted="" playsinline="" uk-video="autoplay: inview; automute: true"></iframe>
-                <div>
-                    <div class="header-title">
-                        <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
-                    </div>
-                    <div class="header-search">
-                        <div class="header-search-icon">
-                            <svg class="search-svg" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" data-svg="search-large"><circle fill="none" stroke="#fff" stroke-width="1.8" cx="17.5" cy="17.5" r="16.5"></circle><line fill="none" stroke="#fff" stroke-width="1.8" x1="38" y1="39" x2="29" y2="30"></line></svg>
-                        </div>
-                        <input class="header-search-input" placeholder="Search">
-                    </div>
-                </div>
-            </div>
-            <div class="header-box-2">
-                <div>
-                    <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
-                    <button>BUTTON</button>
-                </div>
-            </div>
-
-
-           <!-- <div th:replace="fragments/header :: author"></div>-->
-        </div>
-        <div class="category-box">
+        <div class="category-box" style="padding-top: 5rem; margin-top: 0">
             <div th:each="tag : ${allTags.subList(0,11)}"><a th:text="${tag.name.substring(1)}">CATEGORY</a></div>
             <!--<div th:replace="fragments/category :: category-item"></div>-->
             <div><a href="#all-tags" type="button" uk-toggle>...</a></div>
+        </div>
+        <div class="search-box">
+            <h2 th:text="|Search Results for: ${query}|"></h2>
+            <p th:text="|(${results} results)|"></p>
         </div>
         <div class="content-box">
             <div class="content-filer">
@@ -81,7 +59,7 @@
                 </ul>
             </div>
             <div class="content-box-container">
-                <div class="content-post" th:each="post : ${allPosts}" >
+                <div class="content-post" th:each="post : ${postList}" >
                     <div class="reactions">
                         <div class="like">
                             <a th:text="${post.getNumberOfLikes()}"  uk-icon="heart"></a>
@@ -173,7 +151,7 @@
                     <div class="uk-animation-slide-bottom-small">
                         <h1>All tags</h1>
                         <div class="all-tags-container">
-                            <a th:each="tag : ${allTags.subList(11,allTags.size()-1)}" th:text="${tag.name.substring(1)}"></a>
+                            <a th:each="tag : ${allTags.subList(11, allTags.size()-1)}" th:text="${tag.name.substring(1)}"></a>
                         </div>
                     </div>
                 </div>
