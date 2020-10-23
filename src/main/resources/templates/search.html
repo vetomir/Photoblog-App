@@ -25,7 +25,7 @@
             </div>
             <div class="uk-navbar-center">
                 <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="#">Home</a></li>
+                    <li class="uk-active"><a th:href="@{/}">Home</a></li>
                     <li><a href="#">Item</a></li>
                     <li><a href="#">Item</a></li>
                     <li><a href="#">Item</a></li>
@@ -52,14 +52,14 @@
             <p th:text="|(${results} results)|"></p>
         </div>
         <div class="content-box">
-            <div class="content-filer">
+<!--            <div class="content-filer">
                 <ul>
                     <li><a class="active">🔥Hot</a></li>
                     <li><a>OPTION</a></li>
                 </ul>
-            </div>
-            <div class="content-box-container">
-                <div class="content-post" th:each="post : ${postList}" >
+            </div>-->
+            <div class="content-box-container" th:each="POSTS : ${groupedPosts}">
+                <div th:class="|content-post ${post.getPatternItem()}|" th:each="post : ${POSTS}" >
                     <div class="reactions">
                         <div class="like">
                             <a th:text="${post.getNumberOfLikes()}"  uk-icon="heart"></a>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+
+    <link href="../static/main/style.css" th:href="@{/style.css}" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800;900&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <title>Home Page</title>
+    <script>
+        function preview() {
+            let imageInput = document.getElementById("image-input");
+            let image = document.getElementById("frameUrl");
+            if (imageInput.value) image.src = imageInput.value;
+            image.classList.add("uk-animation-slide-bottom-small", "image-preview-loading");
+
+            frame.src=URL.createObjectURL(event.target.files[0]);
+        }
+    </script>
+</head>
+<body class="post-single-body">
+<div class="menu">
+    <!--<div th:replace="fragments/menu :: navbar"></div>-->
+    <nav th:fragment="navbar" class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+                <li>
+                    <a class="nav-logo" href="#">PHOTOBLOG</a>
+                </li>
+            </ul>
+        </div>
+        <div class="uk-navbar-center">
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a th:href="@{/}">Home</a></li>
+                <li><a href="#">Item</a></li>
+                <li><a href="#">Item</a></li>
+                <li><a href="#">Item</a></li>
+                <li><a href="#">Item</a></li>
+            </ul>
+        </div>
+        <div class="uk-navbar-right">
+            <ul class="uk-navbar-nav">
+                <button href="#add-post" type="button" uk-toggle  class="new-post-button">ADD NEW POST</button>
+                <li href="#login" type="button" uk-toggle class="uk-active"><svg th:replace="fragments/svg :: key"></svg></li>
+                <li href="#panel" type="button" uk-toggle  class="uk-active"><svg th:replace="fragments/svg :: person"></svg></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<fieldset class="add-post-modal add-post">
+    <form action="#" method="post" th:action="@{/submit}" th:object="${newPost}" >
+        <fieldset class="uk-fieldset">
+            <p class="input-danger" th:if="${#fields.hasAnyErrors()}" th:errors="*{all}"></p>
+            <div class="uk-margin">
+                <textarea id="image-input" class="uk-textarea" placeholder="Photo Url" th:field="*{photoUrl}" th:errorclass="input-danger" onchange="preview()"></textarea>
+            </div>
+
+            <div class="uk-margin">
+                <textarea class="uk-textarea" placeholder="Start writing..." th:field="*{description}" th:errorclass="input-danger" ></textarea>
+            </div>
+            <img class="image-preview" id="frameUrl" src=""/>
+        </fieldset>
+        <p class="uk-text-right buttons">
+            <button class="uk-button uk-button-default" type="reset">Reset</button>
+            <button class="uk-button uk-button-primary" type="submit">Submit</button>
+        </p>
+
+    </form>
+</fieldset>
+    </div>
+</body>
+</html>

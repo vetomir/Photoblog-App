@@ -25,7 +25,7 @@
         </div>
         <div class="uk-navbar-center">
             <ul class="uk-navbar-nav">
-                <li class="uk-active"><a href="#">Home</a></li>
+                <li class="uk-active"><a th:href="@{/}">Home</a></li>
                 <li><a href="#">Item</a></li>
                 <li><a href="#">Item</a></li>
                 <li><a href="#">Item</a></li>
@@ -71,10 +71,11 @@
             </div>
             <div id="comments-modal" uk-offcanvas="flip: true; mode: reveal; overlay: true">
                 <div class="post-single-comment-modal uk-offcanvas-bar">
-                    <div class="post-single-comment-modal-form">
-                        <textarea rows="5"></textarea>
-                        <a class="comment-submit">ADD COMMENT</a>
-                    </div>
+                    <form action="#" method="post" th:action="@{/comments/submit(postId=${post.getId()})}" th:object="${newComment}" class="post-single-comment-modal-form">
+                        <p class="input-danger" th:if="${#fields.hasAnyErrors()}" th:errors="*{all}"></p>
+                        <textarea th:field="*{content}" rows="5"></textarea>
+                        <button class="comment-submit" type="submit" >ADD COMMENT</button>
+                    </form>
                     <div>
                         <div class="post-single-comment-box" th:each="comment : ${post.getCommentReadModels()}">
                             <div>

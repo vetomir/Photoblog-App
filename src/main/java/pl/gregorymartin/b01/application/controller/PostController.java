@@ -34,7 +34,7 @@ class PostController {
         Sort.Direction sortDirection = sort != null ? sort : Sort.Direction.ASC;
         String sortByVariable = sortBy != null ? sortBy : "id";
 
-        return ResponseEntity.ok(postGet.getPosts(pageNumber, sortDirection, sortByVariable));
+        return ResponseEntity.ok(postGet.getPosts(pageNumber, sortDirection, sortByVariable, 25));
     }
 
     @GetMapping

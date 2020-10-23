@@ -44,6 +44,9 @@ interface SqlPostRepository extends PostRepository, JpaRepository<Post, Long> {
     @Query("Select p From Post p where p.description like %?1%")
     Page<Post> findAllByContainedQuery(String query, Pageable pageable);
 
+    @Query("Select count (p) From Post p where p.description like %?1%")
+    long getSizeOfAllByContainedQuery(String query);
+
     @Query("Select p.comments From Post p where p.id = ?1")
     Page<Comment> findAllCommentsByPostId(long id, Pageable pageable);
 }

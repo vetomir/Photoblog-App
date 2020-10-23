@@ -11,17 +11,19 @@ import java.util.List;
 
 @Getter
 @Setter
-@NoArgsConstructor
 public
 class PostWriteModel {
-    @NotBlank(message = "URL Cannot be Blank")
-    @URL(message = "This is not URL")
+    /*@NotBlank(message = "URL Cannot be Blank")
+    @URL(message = "This is not URL")*/
     private String photoUrl;
     @NotBlank(message = "Description Cannot be Blank")
-    @Pattern(regexp="^[A-Za-z0-9]*$",message = "Forbidden symbols in Description Field")
+    /*    @Pattern(regexp="^[A-Za-z0-9]*$",message = "Forbidden symbols in Description Field")*/
     private String description;
     private List<String> tags;
     private long userId;
+
+    public PostWriteModel() {
+    }
 
     public PostWriteModel(@NotBlank(message = "URL Cannot be Blank") @URL(message = "This is not URL") final String photoUrl, @NotBlank(message = "Description Cannot be Blank") @Pattern(regexp = "^[A-Za-z0-9]*$", message = "Forbidden symbols in Description Field") final String description) {
         this.photoUrl = photoUrl;

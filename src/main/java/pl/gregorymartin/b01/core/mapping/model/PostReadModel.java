@@ -24,6 +24,8 @@ public class PostReadModel {
     private int numberOfComments;
     private int numberOfLikes;
 
+    private String patternItem;
+
     //liked by present user
     private boolean presentUser;
 

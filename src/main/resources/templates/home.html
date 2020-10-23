@@ -6,16 +6,49 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
+    <link href="../static/main/animations.css" th:href="@{/animations.css}" rel="stylesheet" />
     <link href="../static/main/style.css" th:href="@{/style.css}" rel="stylesheet" />
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800;900&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
     <title>Home Page</title>
+    <script>
+        function preview() {
+            let imageInput = document.getElementById("image-input");
+            let image = document.getElementById("frameUrl");
+            if (imageInput.value) image.src = imageInput.value;
+            image.classList.add("uk-animation-slide-bottom-small", "image-preview-loading");
+
+            frame.src=URL.createObjectURL(event.target.files[0]);
+        }
+
+        setTimeout(function(){
+            $('.show-up').removeClass('show-up');
+            $('.show-up-mock').removeClass('show-up-mock');
+        },7000);
+
+        setTimeout(function(){
+            $('#loader').addClass('hide');
+            $('#loader').removeAttr('id');
+        },7000);
+
+    </script>
 </head>
 <body>
+    <div id="loader">
+        <div>
+            <div id="shadow"></div>
+            <div id="box"></div>
+        </div>
+    </div>
+
     <div class="menu">
+        <div class="show-up-mock">
+        </div>
         <!--<div th:replace="fragments/menu :: navbar"></div>-->
         <nav th:fragment="navbar" class="uk-navbar-container" uk-navbar>
+
             <div class="uk-navbar-left">
                 <ul class="uk-navbar-nav">
                     <li>
@@ -25,7 +58,7 @@
             </div>
             <div class="uk-navbar-center">
                 <ul class="uk-navbar-nav">
-                    <li class="uk-active"><a href="#">Home</a></li>
+                    <li class="uk-active"><a th:href="@{/}">Home</a></li>
                     <li><a href="#">Item</a></li>
                     <li><a href="#">Item</a></li>
                     <li><a href="#">Item</a></li>
@@ -44,7 +77,8 @@
     <div class="canvas">
         <div class="header-box">
             <!--<div th:replace="fragments/header :: header"></div>-->
-            <div style="background: #dddddd">
+            <div class="show-up-mock">
+                <div class="mock"></div>
                 <iframe src="https://player.vimeo.com/video/251646742?title=0&amp;loop=1&amp;byline=0&amp;portrait=0&amp;api=1&amp;player_id=1&amp;api=1&amp;player_id=1" loop="" muted="" playsinline="" uk-video="autoplay: inview; automute: true"></iframe>
                 <div>
                     <div class="header-title">
@@ -54,11 +88,14 @@
                         <div class="header-search-icon">
                             <svg class="search-svg" width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" data-svg="search-large"><circle fill="none" stroke="#fff" stroke-width="1.8" cx="17.5" cy="17.5" r="16.5"></circle><line fill="none" stroke="#fff" stroke-width="1.8" x1="38" y1="39" x2="29" y2="30"></line></svg>
                         </div>
-                        <input class="header-search-input" placeholder="Search">
+                        <form action="#" method="post" th:action="@{/search}" th:object="${query}">
+                            <input class="header-search-input" type="search" placeholder="Search..." th:field="*{description}">
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="header-box-2">
+            <div class="header-box-2 show-up-mock">
+                <div class="mock"></div>
                 <div>
                     <h1>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h1>
                     <button>BUTTON</button>
@@ -69,19 +106,19 @@
            <!-- <div th:replace="fragments/header :: author"></div>-->
         </div>
         <div class="category-box">
-            <div th:each="tag : ${allTags.subList(0,11)}"><a th:text="${tag.name.substring(1)}">CATEGORY</a></div>
+            <div th:each="tag : ${allTags.subList(0,11)}"><a th:href="|search?query=%23${tag.name.substring(1)}" class="show-up-mock" th:text="${tag.name.substring(1)}">CATEGORY</a></div>
             <!--<div th:replace="fragments/category :: category-item"></div>-->
-            <div><a href="#all-tags" type="button" uk-toggle>...</a></div>
+            <div><a class="show-up-mock" href="#all-tags" type="button" uk-toggle>...</a></div>
         </div>
         <div class="content-box">
-            <div class="content-filer">
+<!--            <div class="content-filer">
                 <ul>
                     <li><a class="active">🔥Hot</a></li>
                     <li><a>OPTION</a></li>
                 </ul>
-            </div>
-            <div class="content-box-container">
-                <div class="content-post" th:each="post : ${allPosts}" >
+            </div>-->
+            <div class="content-box-container" th:each="POSTS : ${groupedPosts}">
+                <div th:class="|show-up content-post ${post.getPatternItem()}|" th:each="post : ${POSTS}" >
                     <div class="reactions">
                         <div class="like">
                             <a th:text="${post.getNumberOfLikes()}"  uk-icon="heart"></a>
@@ -137,10 +174,11 @@
 
             <!--<div th:replace="fragments/login :: login-modal"></div>-->
             <div th:id="login" uk-modal>
+
                 <div class="post-modal-login uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
                     <button class="uk-modal-close-outside" type="button" uk-close></button>
                     <div class=" uk-animation-slide-bottom-small">
-                        <form>
+                        <form >
                             <label>Login</label>
                             <input type="text" placeholder="Login" name="fname"><br><br>
                             <label>Password</label>
@@ -155,14 +193,16 @@
                 <div class="post-modal-add-post uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
                     <button class="uk-modal-close-outside" type="button" uk-close></button>
                     <div class=" uk-animation-slide-bottom-small">
-                        <form>
-                            <div class="img-preview">PREVIEW</div>
-                            <label>Url</label>
-                            <textarea type="text" placeholder="write url..."></textarea>
-                            <label>Description</label>
-                            <textarea type="text" rows="5" placeholder="write description..." name="lname"></textarea>
-                            <button type="submit">Submit</button>
+                        <!--/*@thymesVar id="newPosts" type="pl.gregorymartin.b01.core.mapping.model.PostWriteModel"*/-->
+                        <form action="#" method="post" th:action="@{/submit}" th:object="${newPost}">
+                                <label>Url</label>
+                                <textarea id="image-input" th:field="*{photoUrl}" placeholder="write url..." onchange="preview()"></textarea>
+                                <label>Description</label>
+                                <textarea rows="5" th:field="*{description}" placeholder="write description..." name="lname"></textarea>
+                                <button type="submit">Submit</button>
+                            <img class="img-preview image-preview" id="frameUrl" src=""/>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -173,7 +213,7 @@
                     <div class="uk-animation-slide-bottom-small">
                         <h1>All tags</h1>
                         <div class="all-tags-container">
-                            <a th:each="tag : ${allTags.subList(11,allTags.size()-1)}" th:text="${tag.name.substring(1)}"></a>
+                            <a th:href="|search?query=%23${tag.name.substring(1)}" th:each="tag : ${allTags.subList(11,allTags.size()-1)}" th:text="${tag.name.substring(1)}"></a>
                         </div>
                     </div>
                 </div>

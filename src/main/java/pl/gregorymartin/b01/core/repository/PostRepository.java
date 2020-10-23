@@ -18,4 +18,5 @@ public interface PostRepository {
     boolean deleteById(long id);
     Page<Comment> findAllCommentsByPostId(long id, Pageable pageable);
     Page<Post> findAllByContainedQuery(String query, Pageable pageable);
+    long getSizeOfAllByContainedQuery(String query);
 }

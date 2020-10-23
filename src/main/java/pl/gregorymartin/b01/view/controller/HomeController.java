@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.gregorymartin.b01.application.service.post.PostGet;
 import pl.gregorymartin.b01.application.service.tag.TagGet;
-import pl.gregorymartin.b01.core.mapping.model.PostInListReadModel;
 import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
+import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
 import pl.gregorymartin.b01.core.mapping.model.TagReadModel;
 
 import java.util.List;
@@ -29,15 +29,26 @@ class HomeController {
             Model model,
             @RequestParam(defaultValue = "0") int page
     ){
-        List<PostReadModel> allPosts = getPosts.getPosts(page, Sort.Direction.DESC, "id");
-        boolean nextIsExist = getPosts.getPosts(page +1, Sort.Direction.DESC, "id").isEmpty();
-
         List<TagReadModel> allTags = getTags.getAllTags();
         model.addAttribute("allTags", allTags);
 
+        int columns = 5;
+        int rows = 5;
+
+        List<PostReadModel> allPosts = getPosts.getPosts(page, Sort.Direction.DESC, "id", columns * rows);
+        PostPattern.GroupList(model, allPosts, columns);
+
         model.addAttribute("allPosts", allPosts);
-        model.addAttribute("isExist", !nextIsExist);
+        model.addAttribute("newPost", new PostWriteModel());
+        model.addAttribute("query", new PostWriteModel());
         return "home";
     }
+    @GetMapping("/loading")
+    String loading(
+    ){
+        return "loading";
+    }
+
+
 
 }

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import pl.gregorymartin.b01.application.service.post.PostGet;
 import pl.gregorymartin.b01.application.service.tag.TagGet;
+import pl.gregorymartin.b01.core.mapping.model.CommentWriteModel;
 
 @Controller
 class SinglePostController {
@@ -23,6 +24,7 @@ class SinglePostController {
             Model model,
             @RequestParam long id
     ){
+        model.addAttribute("newComment", new CommentWriteModel());
         model.addAttribute("post", getPosts.getPostDto(id));
         return "single-post";
     }

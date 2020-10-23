@@ -12,6 +12,7 @@ import pl.gregorymartin.b01.core.model.Tag;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -90,4 +91,5 @@ public class PostMapper {
                 .numberOfLikes(post.getNumberOfLikes())
                 .build();
     }
+
 }

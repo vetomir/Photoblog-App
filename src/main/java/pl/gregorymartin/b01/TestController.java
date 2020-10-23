@@ -162,10 +162,6 @@ class TestController {
         commentAdd.addComment(new CommentWriteModel(lipsum, 5L,1L));
     }
 
-    @GetMapping("/all")
-    List<PostReadModel> elo(){
-        return postGet.getPosts(0, Sort.Direction.ASC, "id");
-    }
 
     @GetMapping("/tak")
     String tak(){
