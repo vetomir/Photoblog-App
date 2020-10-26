@@ -1,4 +1,4 @@
-package pl.gregorymartin.b01.view.controller;
+package pl.gregorymartin.b01.view.controller.post;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

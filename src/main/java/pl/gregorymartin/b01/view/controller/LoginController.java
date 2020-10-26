@@ -3,6 +3,7 @@ package pl.gregorymartin.b01.view.controller;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,11 +28,7 @@ class LoginController {
 
     @RequestMapping("/login")
     public String login(
-            Authentication authentication
-    ){
-        if (authentication != null){
-            return "redirect:/";
-        }
+    ) {
         return "login";
     }
 }

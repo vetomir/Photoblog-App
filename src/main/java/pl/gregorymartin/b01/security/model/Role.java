@@ -21,7 +21,7 @@ public class Role {
     private String name;
 
     @JsonBackReference
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "roles")
     private Set<User> users;
 
     public Role(String name) {

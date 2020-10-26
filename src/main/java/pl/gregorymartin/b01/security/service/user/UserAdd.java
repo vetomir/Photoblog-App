@@ -27,9 +27,12 @@ class UserAdd {
     }
 
     public UserReadModel registerUser(UserWriteModel userWriteModel){
-        Optional<User> byUsername = userRepository.findByUsername(userWriteModel.getEmail());
+        Optional<User> byUsername = Optional.ofNullable(userRepository.findAllByUsername(userWriteModel.getEmail()));
         Optional<User> byName = userRepository.findByName(userWriteModel.getName());
-        if(byUsername.isEmpty() && byName.isEmpty()){
+        if(byUsername.isPresent() || byName.isPresent()){
+            throw new IllegalArgumentException("User with these username (email) or name is already exists");
+        }
+        else{
             User result = UserMapper.mapUserWriteModelToUserEntity(userWriteModel);
             Optional<Role> roleByName = roleRepository.findByName(DEFAULT_ROLE);
             result.newRole(roleByName.get());
@@ -37,7 +40,6 @@ class UserAdd {
 
             return UserMapper.mapUserEntityToUserReadModel(userRepository.save(result));
         }
-        throw new IllegalArgumentException("User with these username(email) is already exists");
     }
 
 }

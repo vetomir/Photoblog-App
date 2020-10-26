@@ -35,7 +35,8 @@ class PostModify {
         return editPost(postToSave);
     }
 
+    @Transactional
     public void deletePost(long id) {
-        postRepository.deleteById(id);
+        postRepository.deletePostById(id);
     }
 }

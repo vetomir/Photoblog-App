@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800;900&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+    <link href="../static/main/forms.css" th:href="@{/forms.css}" rel="stylesheet" />
+</head>
+<body class="form-box" style="background-image: url('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')">
+<div></div>
+<div>
+    <h1>Register Page</h1>
+
+    <form class="form" method="post" th:action="@{/register}" th:object="${userWriteModel}">
+        <div class="form-errors">
+            <div th:if="${#fields.hasAnyErrors()}" class="uk-alert-warning warn" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p th:errors="*{all}"></p>
+
+            </div>
+            <div th:if="${message != null}" class="uk-alert-danger warn" uk-alert>
+                <a class="uk-alert-close" uk-close></a>
+                <p th:text="${message}"></p>
+            </div>
+        </div>
+
+        <input class="form-input" th:field ="*{email}" type="email"  placeholder="Email"  th:errorclass="'input-warn'"/>
+
+        <input class="form-input" th:field ="*{name}" type="text"  placeholder="Name" th:errorclass="'input-warn'"/>
+
+        <input class="form-input" th:field="*{password}" type="password"  placeholder="Password" th:errorclass="'input-warn'"/>
+        <input class="form-input" th:field="*{password2}" type="password"  placeholder="Repeat Password"  th:errorclass="'input-warn'"/>
+
+        <button class="form-submit" type="submit" >Register</button>
+        <p class="terms">By clicking "Register", I agree to the <a href="#">Terms of service</a></p>
+    </form>
+</div>
+
+<!--        <label style="margin: 10px;">
+            <select th:field="*{role}">
+                <option  th:each="c : ${allRoles}"
+                         th:value="${c.name}"
+                         th:text="${c.name}">
+                </option>
+            </select>
+        </label>-->
+
+
+</body>
+</html>

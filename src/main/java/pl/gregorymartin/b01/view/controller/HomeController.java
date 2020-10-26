@@ -1,6 +1,7 @@
 package pl.gregorymartin.b01.view.controller;
 
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import pl.gregorymartin.b01.application.service.tag.TagGet;
 import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
 import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
 import pl.gregorymartin.b01.core.mapping.model.TagReadModel;
+import pl.gregorymartin.b01.view.controller.post.ListPattern;
 
 import java.util.List;
 
@@ -27,7 +29,8 @@ class HomeController {
     @GetMapping
     String home(
             Model model,
-            @RequestParam(defaultValue = "0") int page
+            @RequestParam(defaultValue = "0") int page,
+            Authentication authentication
     ){
         List<TagReadModel> allTags = getTags.getAllTags();
         model.addAttribute("allTags", allTags);
@@ -36,18 +39,24 @@ class HomeController {
         int rows = 5;
 
         List<PostReadModel> allPosts = getPosts.getPosts(page, Sort.Direction.DESC, "id", columns * rows);
-        PostPattern.GroupList(model, allPosts, columns);
+        ListPattern.GroupList(model, allPosts, columns);
 
         model.addAttribute("allPosts", allPosts);
         model.addAttribute("newPost", new PostWriteModel());
         model.addAttribute("query", new PostWriteModel());
+
+        model.addAttribute("userIsPresent", false);
+        if (authentication != null){
+            model.addAttribute("userIsPresent", true);
+        }
+
         return "home";
     }
-    @GetMapping("/loading")
+/*    @GetMapping("/loading")
     String loading(
     ){
         return "loading";
-    }
+    }*/
 
 
 

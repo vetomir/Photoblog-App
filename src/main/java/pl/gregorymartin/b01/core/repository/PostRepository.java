@@ -15,7 +15,7 @@ public interface PostRepository {
     List<Post> findAll();
     Page<Post> findAll(Pageable pageable);
     Optional<Post> findById(long id);
-    boolean deleteById(long id);
+    void deletePostById(long id);
     Page<Comment> findAllCommentsByPostId(long id, Pageable pageable);
     Page<Post> findAllByContainedQuery(String query, Pageable pageable);
     long getSizeOfAllByContainedQuery(String query);

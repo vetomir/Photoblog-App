@@ -50,7 +50,7 @@ public class User extends Audit implements UserDetails {
             fetch = FetchType.LAZY, optional = false)
     private Rate rate;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(

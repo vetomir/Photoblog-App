@@ -49,4 +49,6 @@ interface SqlPostRepository extends PostRepository, JpaRepository<Post, Long> {
 
     @Query("Select p.comments From Post p where p.id = ?1")
     Page<Comment> findAllCommentsByPostId(long id, Pageable pageable);
+
+    void deletePostById(long id);
 }

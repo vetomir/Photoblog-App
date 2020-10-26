@@ -13,6 +13,7 @@ import pl.gregorymartin.b01.application.service.tag.TagGet;
 import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
 import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
 import pl.gregorymartin.b01.core.mapping.model.TagReadModel;
+import pl.gregorymartin.b01.view.controller.post.ListPattern;
 
 import java.util.List;
 
@@ -37,7 +38,7 @@ class SearchController {
         Page<PostReadModel> postList = postGet.searchPosts(query, page, Sort.Direction.DESC, "id", colums * rows);
         boolean nextIsExist = postGet.searchPosts(query,page +1, Sort.Direction.DESC, "id",colums * rows).isEmpty();
         /*model.addAttribute("postList", postList.getContent());*/
-        PostPattern.GroupList(model, postList.getContent(), 5);
+        ListPattern.GroupList(model, postList.getContent(), 5);
         model.addAttribute("results", postGet.numberOfResultsFromSearchPost(query));
         model.addAttribute("query", query);
         model.addAttribute("isExist", !nextIsExist);

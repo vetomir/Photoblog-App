@@ -4,12 +4,17 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700;800;900&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/css/uikit.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/uikit@3.5.7/dist/js/uikit-icons.min.js"></script>
+<link href="../static/main/forms.css" th:href="@{/forms.css}" rel="stylesheet" />
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>k</title>
 </head>
-<body>
+<!--<body>
 <h1>Login Page</h1>
 <form th:action="@{/login}" method="post">
     <label for="username">Username</label>
@@ -21,5 +26,30 @@
     <input type="submit" value="Login">
 </form>
 
+
+</body>-->
+<body class="form-box" style="background-image: url('https://images.unsplash.com/photo-1497864149936-d3163f0c0f4b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')">
+<div></div>
+<div>
+    <h1>Login Page</h1>
+
+    <form class="form" th:action="@{/login}" method="post">
+
+
+
+        <!--<input class="form-input" type="text" id="username" name="username" th:errorclass="'input-warn'"/> <br/>-->
+        <input class="form-input" type="text" id="username" name="username" />
+
+        <!--<input class="form-input" type="password" id="password" name="password" placeholder="Password" th:errorclass="'input-warn'"/>-->
+        <input class="form-input" type="password" id="password" name="password"/>
+
+        <input type="checkbox" id="remember-me" name="remember-me"/>
+
+
+        <input class="form-submit" type="submit" value="Login">
+
+        <p class="terms">By clicking "Register", I agree to the <a href="#">Terms of service</a></p>
+    </form>
+</div>
 </body>
 </html>

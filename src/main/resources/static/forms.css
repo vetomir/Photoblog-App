@@ -1,0 +1,118 @@
+@keyframes form-submit {
+    0% {
+        background: #f5f5f5;
+        box-shadow: 0 0 0 #f5f5f5;
+    }
+    100% {
+        background: #333;
+        box-shadow: 0 0 .5rem #333;
+    }
+}
+.form-box{
+    background-attachment: fixed;
+    font-family: 'Montserrat', sans-serif;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+.form-box div{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-box h1{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 100;
+    font-size: 4rem;
+    color: #f5f5f5;
+    letter-spacing: -.1rem;
+    text-shadow: 0 0 0.1rem #050d17;
+}
+.form-box .form{
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    align-items: center;
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding:2rem;
+    background-color: #fff;
+    box-shadow: 0 1rem 1rem #050d17;
+}
+.form-box .form > .form-input{
+    font-family: 'Montserrat', sans-serif;
+    margin: .5rem 0;
+    width: 100%;
+    background: #ebebeb;
+    background: transparent;
+    height: 3rem;
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: .2rem;
+    outline: none;
+    border:1px solid #f5f5f5;
+}
+.form-box .form > .form-input:hover{
+    border: 1px solid #ddd;
+}
+.form-box .form .input-warn{
+    background: #fef4f6;
+}
+.form-box .form > .input-warn:hover{
+    border: 1px solid #f0506e;
+}
+.form-box .form .input-warn::placeholder{
+    color: #f0506e;
+}
+
+.form-box .form > .form-submit{
+    width: 50%;
+    padding: 1rem 2rem;
+    border: 3px solid #333;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-top: 1rem;
+    font-size: 1rem;
+    background: #f5f5f5;
+    background: transparent;
+    color: #333;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: .1rem;
+    outline: none;
+}
+.form-box .form > .form-submit:hover{
+    background: #333;
+    color: #fff;
+    box-shadow: 0 0 .5rem #333;
+    animation-duration: 1s;
+    animation-name: form-submit;
+    animation-fill-mode: forwards;
+}
+.form-box .form > .terms{
+    font-size: .8rem;
+}
+.form-box .form > .terms > a{
+    font-weight: 600;
+    text-decoration: none;
+    color: #695bce;
+}
+.form-errors{
+    position: absolute;
+    top: 1rem;
+}
+.form-errors .warn{
+    color: #fef4f6;
+    background: #f0506e;
+}
+.form-errors > .warn p{
+    padding-right: 2rem;
+}

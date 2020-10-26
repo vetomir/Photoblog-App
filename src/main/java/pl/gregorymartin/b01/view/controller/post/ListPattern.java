@@ -1,4 +1,4 @@
-package pl.gregorymartin.b01.view.controller;
+package pl.gregorymartin.b01.view.controller.post;
 
 import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Random;
 
 @RequiredArgsConstructor
-class PostPattern {
+public class ListPattern {
 
-    static void GroupList(Model model, List<PostReadModel> posts, int columns){
+    public static void GroupList(Model model, List<PostReadModel> posts, int columns){
         if(posts != null){
             posts.forEach(x -> x.setPatternItem(randomPattern()));
 
