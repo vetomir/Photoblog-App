@@ -1,18 +1,14 @@
 package pl.gregorymartin.b01.core.mapping;
 
 
-
-import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
-import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
 import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
+import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
 import pl.gregorymartin.b01.core.model.Post;
 import pl.gregorymartin.b01.core.model.Tag;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -83,8 +79,7 @@ public class PostMapper {
                         .map(Tag::getTitle)
                         .collect(Collectors.toList()))
                 .createdOn(post.formatCreatedOn())
-                .commentReadModels(Lists.reverse(
-                        CommentMapper.mapEntityToCommentReadModel(post.getComments())))
+                .commentReadModels(CommentMapper.mapEntityToCommentReadModel(post.getComments()))
                 .userName(post.getUser().getName())
                 .userAvatar(post.getUser().getAvatar())
                 .numberOfComments(post.getNumberOfComments())

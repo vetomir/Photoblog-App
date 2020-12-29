@@ -1,6 +1,6 @@
 package pl.gregorymartin.b01.core.mapping;
 
-import org.junit.Assert;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
 import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
@@ -23,11 +23,11 @@ class PostMapperSpec {
         Post post = PostMapper.mapPostWriteModelsToEntity(postWriteModel);
 
         //then
-        Assert.assertEquals("ugabuga #Test #TestAnother #Test", post.getDescription());
-        Assert.assertEquals("test.pl/test.jpg", post.getPhotoUrl());
-        Assert.assertEquals("#Test", post.getTags().get(0).getTitle());
-        Assert.assertEquals("#TestAnother", post.getTags().get(1).getTitle());
-        Assert.assertEquals(2, post.getTags().size());
+        assertEquals("ugabuga #Test #TestAnother #Test", post.getDescription());
+        assertEquals("test.pl/test.jpg", post.getPhotoUrl());
+        assertEquals("#Test", post.getTags().get(0).getTitle());
+        assertEquals("#TestAnother", post.getTags().get(1).getTitle());
+        assertEquals(2, post.getTags().size());
 
     }
 
@@ -44,9 +44,9 @@ class PostMapperSpec {
         List<Post> postList = PostMapper.mapPostWriteModelsToEntity(list);
 
         //then
-        Assert.assertEquals("ugabuga #Test #TestAnother #Test", postList.get(0).getDescription());
-        Assert.assertEquals("ugabuga #Test1 #TestAnother1 #Test1", postList.get(1).getDescription());
-        Assert.assertEquals(2, postList.size());
+        assertEquals("ugabuga #Test #TestAnother #Test", postList.get(0).getDescription());
+        assertEquals("ugabuga #Test1 #TestAnother1 #Test1", postList.get(1).getDescription());
+        assertEquals(2, postList.size());
     }
 
     @Test
@@ -62,9 +62,9 @@ class PostMapperSpec {
         //when
         PostReadModel postReadModel = PostMapper.mapPostEntityToPostReadModel(post);
         //then
-        Assert.assertEquals(post.getDescription(), postReadModel.getDescription());
-        Assert.assertEquals(post.getUser().getName(), postReadModel.getUserName());
-        Assert.assertEquals(post.getTags().get(0).getTitle(), postReadModel.getTags().get(0));
+        assertEquals(post.getDescription(), postReadModel.getDescription());
+        assertEquals(post.getUser().getName(), postReadModel.getUserName());
+        assertEquals(post.getTags().get(0).getTitle(), postReadModel.getTags().get(0));
 
     }
 }

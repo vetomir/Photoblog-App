@@ -1,6 +1,5 @@
 package pl.gregorymartin.b01.core.mapping;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import pl.gregorymartin.b01.core.mapping.model.CommentReadModel;
 import pl.gregorymartin.b01.core.mapping.model.CommentWriteModel;
@@ -10,6 +9,8 @@ import pl.gregorymartin.b01.security.model.User;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommentMapperSpec {
 
@@ -21,7 +22,7 @@ class CommentMapperSpec {
         //when
         Comment comment = CommentMapper.mapCommentWriteModelToEntity(commentWriteModel);
         //then
-        Assert.assertEquals("Lorem", comment.getContent());
+        assertEquals("Lorem", comment.getContent());
     }
 
     @Test
@@ -39,9 +40,9 @@ class CommentMapperSpec {
         //when
         List<Comment> commentList = CommentMapper.mapCommentWriteModelToEntity(list);
         //then
-        Assert.assertEquals("Lorem1", commentList.get(0).getContent());
-        Assert.assertEquals("Lorem2", commentList.get(1).getContent());
-        Assert.assertEquals(2, commentList.size());
+        assertEquals("Lorem1", commentList.get(0).getContent());
+        assertEquals("Lorem2", commentList.get(1).getContent());
+        assertEquals(2, commentList.size());
     }
 
     @Test
@@ -58,7 +59,7 @@ class CommentMapperSpec {
         //when
         CommentReadModel commentReadModel = CommentMapper.mapEntityToCommentReadModel(comment);
         //then
-        Assert.assertEquals(comment.getContent(), commentReadModel.getContent());
-        Assert.assertEquals(comment.getUser().getName(), commentReadModel.getUserName());
+        assertEquals(comment.getContent(), commentReadModel.getContent());
+        assertEquals(comment.getUser().getName(), commentReadModel.getUserName());
     }
 }

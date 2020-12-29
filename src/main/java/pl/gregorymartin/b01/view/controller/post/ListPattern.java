@@ -1,12 +1,10 @@
 package pl.gregorymartin.b01.view.controller.post;
 
-import com.google.common.collect.Lists;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ui.Model;
 import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 

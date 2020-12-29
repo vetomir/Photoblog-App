@@ -1,18 +1,11 @@
 package pl.gregorymartin.b01.core.mapping;
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-import pl.gregorymartin.b01.core.mapping.model.PostReadModel;
-import pl.gregorymartin.b01.core.mapping.model.PostWriteModel;
-import pl.gregorymartin.b01.core.model.Post;
-import pl.gregorymartin.b01.core.model.Tag;
-import pl.gregorymartin.b01.core.repository.PostRepository;
 import pl.gregorymartin.b01.security.mapping.UserMapper;
 import pl.gregorymartin.b01.security.mapping.model.UserReadModel;
 import pl.gregorymartin.b01.security.mapping.model.UserWriteModel;
 import pl.gregorymartin.b01.security.model.Role;
 import pl.gregorymartin.b01.security.model.User;
-import pl.gregorymartin.b01.security.repository.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -21,8 +14,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class UserMapperSpec {
 
@@ -33,7 +25,7 @@ class UserMapperSpec {
         //when
         User user = UserMapper.mapUserWriteModelToUserEntity(userWriteModel);
         //then
-        Assert.assertEquals("abc@test.com", user.getUsername());
+        assertEquals("abc@test.com", user.getUsername());
     }
 
     @Test
@@ -57,9 +49,9 @@ class UserMapperSpec {
         //when
         List<User> userList = UserMapper.mapUserWriteModelToUserEntity(list);
         //then
-        Assert.assertEquals("abc@test.com", userList.get(0).getUsername());
-        Assert.assertEquals("abc1@test.com", userList.get(1).getUsername());
-        Assert.assertEquals(2, userList.size());
+        assertEquals("abc@test.com", userList.get(0).getUsername());
+        assertEquals("abc1@test.com", userList.get(1).getUsername());
+        assertEquals(2, userList.size());
     }
 
     @Test
@@ -72,9 +64,9 @@ class UserMapperSpec {
         //when
         UserReadModel userReadModel = UserMapper.mapUserEntityToUserReadModel(user);
         //then
-        Assert.assertEquals(user.getName(), userReadModel.getName());
-        Assert.assertEquals(user.getUsername(), userReadModel.getEmail());
-        Assert.assertEquals(2, userReadModel.getRoles().size());
+        assertEquals(user.getName(), userReadModel.getName());
+        assertEquals(user.getUsername(), userReadModel.getEmail());
+        assertEquals(2, userReadModel.getRoles().size());
 
     }
 }
